@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const AppError = require('./utils/appError');
+const userRouter = require('./routes/auth.routes');
 
 // Enable logging in development
 if (process.env.NODE_ENV === 'development') {
@@ -14,6 +15,8 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
+
+app.use('/api/v1/auth', userRouter);
 
 // Global Middleware for not found routes
 app.all('*', (req, res, next) => {
