@@ -3,6 +3,7 @@ const app = express();
 const morgan = require('morgan');
 const AppError = require('./utils/appError');
 const userRouter = require('./routes/auth.routes');
+const productRouter = require('./routes/product.routes');
 
 // Enable logging in development
 if (process.env.NODE_ENV === 'development') {
@@ -17,6 +18,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/v1/auth', userRouter);
+app.use('/api/v1/products', productRouter);
 
 // Global Middleware for not found routes
 app.all('*', (req, res, next) => {
