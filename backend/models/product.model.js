@@ -41,8 +41,8 @@ const productSchema = new mongoose.Schema({
     },
     colors: {
         type: String,
-        required: true,
-        enum: ['Red', 'Blue', 'Black']
+        enum: ['Red', 'Blue', 'Green', 'Yellow', 'Black', 'White'],
+        required: true
     },
     availableQuantity: {
         type: Number,
