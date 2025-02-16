@@ -10,6 +10,7 @@ const cartRouter = require('./routes/cart.routes');
 const categoryRouter = require('./routes/category.routes');
 const customerRouter = require('./routes/customer.routes');
 const reviewRouter = require('./routes/review.routes');
+const addressRouter = require('./routes/address.routes');
 
 // Enable logging in development
 if (process.env.NODE_ENV === 'development') {
@@ -31,6 +32,7 @@ app.use('/api/v1/cart', cartRouter);
 app.use('/api/v1/categories', categoryRouter);
 app.use('/api/v1/admin/customers', customerRouter);
 app.use('/api/v1/reviews', reviewRouter);
+app.use('/api/v1/address', addressRouter);
 
 
 // Global Middleware for not found routes
