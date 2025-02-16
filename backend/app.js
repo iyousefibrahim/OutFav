@@ -2,6 +2,13 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const AppError = require('./utils/appError');
+const cors = require('cors');
+const compression = require('compression');
+
+// Security Middlewares
+const helmet = require('helmet');
+const xssClean = require('xss-clean');
+const rateLimiter = require('./middlewares/rateLimiter');
 
 // Importing Routes
 const userRouter = require('./routes/auth.routes');
@@ -13,6 +20,18 @@ const reviewRouter = require('./routes/review.routes');
 const addressRouter = require('./routes/address.routes');
 const stripeRouter = require('./routes/payment.routes');
 
+// Enable CORS
+app.use(cors());
+
+// Use helmet for securing HTTP headers
+app.use(helmet());
+
+// Use compression for response body compression
+app.use(compression());
+
+// Use xss-clean to prevent XSS attacks
+app.use(xssClean());
+
 // Enable logging in development
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
@@ -20,6 +39,9 @@ if (process.env.NODE_ENV === 'development') {
 
 // Body parser middleware
 app.use(express.json());
+
+// Rate limiter middleware
+app.use(rateLimiter);
 
 app.get('/', (req, res) => {
     res.write('Welcome to OutFav API!');
