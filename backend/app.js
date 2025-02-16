@@ -2,11 +2,14 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const AppError = require('./utils/appError');
+
+// Importing Routes
 const userRouter = require('./routes/auth.routes');
 const productRouter = require('./routes/product.routes');
 const cartRouter = require('./routes/cart.routes');
 const categoryRouter = require('./routes/category.routes');
 const customerRouter = require('./routes/customer.routes');
+const reviewRouter = require('./routes/review.routes');
 
 // Enable logging in development
 if (process.env.NODE_ENV === 'development') {
@@ -17,14 +20,17 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.write('Welcome to OutFav API!');
+    res.end();
 });
 
+// Mounting Routes
 app.use('/api/v1/auth', userRouter);
 app.use('/api/v1/products', productRouter);
 app.use('/api/v1/cart', cartRouter);
 app.use('/api/v1/categories', categoryRouter);
 app.use('/api/v1/admin/customers', customerRouter);
+app.use('/api/v1/reviews', reviewRouter);
 
 
 // Global Middleware for not found routes
