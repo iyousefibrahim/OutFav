@@ -11,6 +11,7 @@ const categoryRouter = require('./routes/category.routes');
 const customerRouter = require('./routes/customer.routes');
 const reviewRouter = require('./routes/review.routes');
 const addressRouter = require('./routes/address.routes');
+const stripeRouter = require('./routes/payment.routes');
 
 // Enable logging in development
 if (process.env.NODE_ENV === 'development') {
@@ -33,6 +34,7 @@ app.use('/api/v1/categories', categoryRouter);
 app.use('/api/v1/admin/customers', customerRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/address', addressRouter);
+app.use('/api/v1/payment', stripeRouter);
 
 
 // Global Middleware for not found routes
