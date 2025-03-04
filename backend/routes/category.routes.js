@@ -5,8 +5,8 @@ const verifyToken = require('../middlewares/verifyToken');
 const verifyRole = require('../middlewares/verifyRole');
 const upload = require('../middlewares/upload');
 
-router.get('/', verifyToken, categoryController.getAllCategories);
-router.get('/:id', verifyToken, categoryController.getCategory);
+router.get('/', categoryController.getAllCategories);
+router.get('/:id', categoryController.getCategory);
 router.post('/', verifyToken, verifyRole('admin'), upload.single('categoryImage'), categoryController.createCategory);
 
 
