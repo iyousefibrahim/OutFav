@@ -1,0 +1,66 @@
+<nav class="bg-white">
+    <div class=" px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center justify-between">
+
+            <!-- Mobile menu button -->
+            <div class="absolute inset-y-0 right-0 flex items-center lg:hidden">
+                <button type="button"
+                    class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-none focus:ring-inset"
+                    aria-controls="mobile-menu" aria-expanded="false" (click)="toggleMenu()">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="block size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                        aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="flex items-center w-full justify-between">
+
+                <div  class="flex w-[20%] justify-center gap-2 items-center">
+                    <img routerLink="/home" class="h-8 w-auto cursor-pointer" src="assets/Logo.png"alt="OutFav Logo">
+                    <h3 routerLink="/home" class="font-extrabold cursor-pointer">OutFav</h3>
+                </div>
+
+                
+                <div class="hidden w-auto lg:flex justify-center items-center space-x-7">
+                    <a routerLink="/home" class="font-medium hover:text-(--neutral-800) transition-colors" >Home</a>
+                    <a routerLink="/categories" class="font-medium hover:text-(--neutral-800) transition-colors" >Categories</a>
+                    <a routerLink="/about" class="font-medium hover:text-(--neutral-800) transition-colors">About</a>
+                    <a routerLink="/contact" class="font-medium hover:text-(--neutral-800) transition-colors" >Contact</a>
+                </div>
+                
+
+                <div class="hidden w-auto lg:flex items-center gap-5">
+
+                    <div class="relative">
+                        <img class="absolute cursor-pointer top-3 left-2.5" src="assets/icons/Search.png" alt="Search Icon">
+                        <input type="search" name="search" id="search" class="focus:outline-none border-1 border-(--neutral-300) rounded-[10px] pl-5 md:px-10 py-3" placeholder="Search products">
+                    </div>
+
+                    <img routerLink="/cart" class="w-6 cursor-pointer" src="assets/icons/Cart.png" alt="Cart Icon">
+                    <img class="w-6 cursor-pointer" src="assets/icons/User.png" alt="User Icon">
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="lg:hidden w-full flex justify-end" #mobileMenu>
+        <div class="space-y-1 px-2 pt-2 pb-3 flex w-full flex-wrap flex-col">
+            <div class="flex gap-3">
+                <img routerLink="/cart" class="w-6 cursor-pointer" src="assets/icons/Cart.png" alt="Cart Icon">
+                <img class="w-6 cursor-pointer" src="assets/icons/User.png" alt="User Icon">
+            </div>
+            <div class="w-25 flex flex-col">
+            <a routerLink="/home" class="font-medium cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors" >Home</a>
+            <a routerLink="/categories" class="font-medium cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors" >Categories</a>
+            <a routerLink="/about" class="font-medium cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors">About</a>
+            <a routerLink="/contact" class="font-medium cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors" >Contact</a>
+            </div>
+        </div>
+    </div>
+</nav>

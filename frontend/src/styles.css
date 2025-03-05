@@ -31,7 +31,7 @@ body {
     --neutral-100: #F1F5F9;
     --neutral-50: #F8FAFC;
 
-    /* Semantic Colors */
+    /* Blue Colors */
     --blue-900: #1E40AF;
     --blue-800: #1E3A8A;
     --blue-700: #1D4ED8;
@@ -43,6 +43,7 @@ body {
     --blue-100: #DBEAFE;
     --blue-50: #EFF6FF;
 
+    /* Green Colors */
     --green-900: #14532D;
     --green-800: #166534;
     --green-700: #15803D;
@@ -54,6 +55,7 @@ body {
     --green-100: #DCFCE7;
     --green-50: #F0FDF4;
 
+    /* Red Colors */
     --red-900: #7F1D1D;
     --red-800: #991B1B;
     --red-700: #B91C1C;
@@ -65,6 +67,7 @@ body {
     --red-100: #FEE2E2;
     --red-50: #FEF2F2;
 
+    /* Yellow Colors */
     --yellow-900: #713F12;
     --yellow-800: #854D0E;
     --yellow-700: #A16207;
@@ -75,4 +78,64 @@ body {
     --yellow-200: #FEF08A;
     --yellow-100: #FEF9C3;
     --yellow-50: #FEFCE8;
+
+    /* Orange Colors */
+    --orange-900: #7C2D12;
+    --orange-800: #9A3412;
+    --orange-700: #C2410C;
+    --orange-600: #EA580C;
+    --orange-500: #F97316;
+    --orange-400: #FB923C;
+    --orange-300: #FDBA74;
+    --orange-200: #FED7AA;
+    --orange-100: #FFEDD5;
+    --orange-50: #FFF7ED;
+
+    /* Purple Colors */
+    --purple-900: #4C1D95;
+    --purple-800: #5B21B6;
+    --purple-700: #6D28D9;
+    --purple-600: #7E3AF2;
+    --purple-500: #8B5CF6;
+    --purple-400: #A78BFA;
+    --purple-300: #C4B5FD;
+    --purple-200: #DDD6FE;
+    --purple-100: #EDE9FE;
+    --purple-50: #F5F3FF;
+
+    /* Pink Colors */
+    --pink-900: #831843;
+    --pink-800: #9D174D;
+    --pink-700: #BE185D;
+    --pink-600: #DB2777;
+    --pink-500: #EC4899;
+    --pink-400: #F472B6;
+    --pink-300: #F9A8D4;
+    --pink-200: #FBCFE8;
+    --pink-100: #FCE7F3;
+    --pink-50: #FDF2F8;
+
+    /* Cyan Colors */
+    --cyan-900: #164E63;
+    --cyan-800: #155E75;
+    --cyan-700: #0E7490;
+    --cyan-600: #0891B2;
+    --cyan-500: #06B6D4;
+    --cyan-400: #22D3EE;
+    --cyan-300: #67E8F9;
+    --cyan-200: #A5F3FC;
+    --cyan-100: #CFFAFE;
+    --cyan-50: #ECFEFF;
+
+    /* Teal Colors */
+    --teal-900: #134E4A;
+    --teal-800: #115E59;
+    --teal-700: #0F766E;
+    --teal-600: #0D9488;
+    --teal-500: #14B8A6;
+    --teal-400: #2DD4BF;
+    --teal-300: #5EEAD4;
+    --teal-200: #99F6E4;
+    --teal-100: #CCFBF1;
+    --teal-50: #F0FDFA;
 }

@@ -17,21 +17,21 @@ export const routes: Routes = [
     {
         path: "", component: UserAuthLayoutComponent, children: [
             { path: "", redirectTo: 'login', pathMatch: 'full' },
-            { path: 'login', loadComponent: () => import('./components/user-login/user-login.component').then(a => a.UserLoginComponent), title: "Login" },
-            { path: 'register', loadComponent: () => import('./components/user-register/user-register.component').then(a => a.UserRegisterComponent), title: "Register" },
+            { path: 'login', loadComponent: () => import('./components/user/user-login/user-login.component').then(a => a.UserLoginComponent), title: "Login" },
+            { path: 'register', loadComponent: () => import('./components/user/user-register/user-register.component').then(a => a.UserRegisterComponent), title: "Register" },
         ]
     },
 
     {
         path: 'admin', component: AdminAuthLayoutComponent, children: [
             { path: '', redirectTo: 'login', pathMatch: 'full' },
-            { path: 'login', loadComponent: () => import('./components/admin-login/admin-login.component').then(a => a.AdminLoginComponent) }
+            { path: 'login', loadComponent: () => import('./components/admin/admin-login/admin-login.component').then(a => a.AdminLoginComponent) }
         ]
     },
 
     {
         path: 'admin', component: AdminLayoutComponent, children: [
-            { path: 'dashboard', loadComponent: () => import('./components/admin-dashboard/admin-dashboard.component').then(a => a.AdminDashboardComponent) }
+            { path: 'dashboard', loadComponent: () => import('./components/admin/admin-dashboard/admin-dashboard.component').then(a => a.AdminDashboardComponent) }
         ]
     },
 
