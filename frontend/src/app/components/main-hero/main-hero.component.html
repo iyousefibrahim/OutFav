@@ -1,0 +1,20 @@
+<main class="bg-(--neutral-100) overflow-hidden">
+    <div class="my-container">
+        <div class="flex flex-wrap pt-28 gap-y-7 md:gap-y-0 md:pt-0 md:flex-nowrap">
+            <div class="md:w-[60%] w-full flex flex-col gap-y-5 justify-center">
+                <h1 class="font-bold text-4xl text-(--neutral-800)">Fresh arrivals online</h1>
+                <p class="text-(--neutral-600)">Discover Our Newest Collection Today.</p>
+                <app-button [routerLink]="'/products'" [title]="'View Collection'" 
+                    [bgColor]="'bg-(--neutral-800)'" [textColorClass]="'text-white'" [buttonPadding]="'10px 15px'"
+                    [imageSrc]="'assets/icons/Arrow Right.png'" [buttonWidth]="'200px'">
+                </app-button>
+            </div>
+            <div class="relative flex justify-end w-full lg:w-[40%]">
+                <img class="lg:w-[50%] md:w-[55%] sm:w-[60%] z-10" src="assets/hero/Hero Image.png" alt="Hero Image">
+                <img class="absolute right-0 top-0 transform scale-100 lg:scale-100" src="assets/hero/Ellipse.png" alt="Ellipse">
+            </div>
+            
+            
+        </div>
+    </div>
+</main>

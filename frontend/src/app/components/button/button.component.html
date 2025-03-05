@@ -1,0 +1,11 @@
+<button routerLink="{{routerLink}}" [ngClass]="[textColorClass, bgColor]"
+        [ngStyle]="{
+          'width': buttonWidth,
+          'padding': buttonPadding
+        }"
+        class="flex cursor-pointer items-center justify-center px-14 rounded-[10px] gap-x-0.5">
+    {{title}}
+    @if (imageSrc) {
+        <img [src]="imageSrc" alt="Arrow Image">
+    }
+</button>
