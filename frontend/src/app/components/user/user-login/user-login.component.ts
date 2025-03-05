@@ -5,6 +5,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
 import { NgClass } from '@angular/common';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,6 +19,8 @@ export class UserLoginComponent {
   private readonly _authService = inject(AuthService);
   private readonly _FormBuilder = inject(FormBuilder);
   private readonly _MessageService = inject(MessageService);
+  private readonly _Router = inject(Router);
+  
   @ViewChild('passwordInput') passwordInput!: ElementRef;
   @ViewChild('hideEye') hideEye!: ElementRef;
 
@@ -37,6 +40,9 @@ export class UserLoginComponent {
           this.isLoading = false;
           this._MessageService.add({ severity: 'success', summary: 'Success', detail: "You're Logged In!" });
           localStorage.setItem('token', JSON.stringify(res.data.token));
+          setTimeout(() => {
+            this._Router.navigate(['/home']);
+          }, 2500);
         },
         error: (err) => {
           this.isLoading = false;

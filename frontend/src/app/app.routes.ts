@@ -4,18 +4,20 @@ import { UserAuthLayoutComponent } from './layouts/user-auth-layout/user-auth-la
 import { AdminAuthLayoutComponent } from './layouts/admin-auth-layout/admin-auth-layout.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import { isLoggedInGuard } from './core/guards/is-logged-in.guard';
+import { notLoggedInGuard } from './core/guards/not-logged-in.guard';
 
 export const routes: Routes = [
 
     {
-        path: "", component: UserLayoutComponent, children: [
+        path: "", component: UserLayoutComponent, canActivate: [isLoggedInGuard], children: [
             { path: "", redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', loadComponent: () => import('./components/home/home.component').then(h => h.HomeComponent), title: "OutFav" },
         ]
     },
 
     {
-        path: "", component: UserAuthLayoutComponent, children: [
+        path: "", component: UserAuthLayoutComponent, canActivate: [notLoggedInGuard], children: [
             { path: "", redirectTo: 'login', pathMatch: 'full' },
             { path: 'login', loadComponent: () => import('./components/user/user-login/user-login.component').then(a => a.UserLoginComponent), title: "Login" },
             { path: 'register', loadComponent: () => import('./components/user/user-register/user-register.component').then(a => a.UserRegisterComponent), title: "Register" },
