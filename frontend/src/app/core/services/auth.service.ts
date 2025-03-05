@@ -26,4 +26,11 @@ export class AuthService {
     return this._HttpClient.post(`${baseUrl}/auth/change-password`, data);
   }
 
+  checkAdmin(): Observable<any> {
+    return this._HttpClient.get(`${baseUrl}/auth/admin/check-admin`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+  }
 }

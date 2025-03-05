@@ -6,6 +6,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { isLoggedInGuard } from './core/guards/is-logged-in.guard';
 import { notLoggedInGuard } from './core/guards/not-logged-in.guard';
+import { isAdminGuard } from './core/guards/is-admin.guard';
 
 export const routes: Routes = [
 
@@ -32,7 +33,7 @@ export const routes: Routes = [
     },
 
     {
-        path: 'admin', component: AdminLayoutComponent, children: [
+        path: 'admin', component: AdminLayoutComponent, canActivate: [isAdminGuard], children: [
             { path: 'dashboard', loadComponent: () => import('./components/admin/admin-dashboard/admin-dashboard.component').then(a => a.AdminDashboardComponent) }
         ]
     },

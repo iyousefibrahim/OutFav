@@ -1,6 +1,9 @@
-// import { CanActivateFn } from '@angular/router';
+import { inject } from '@angular/core';
+import { CanActivateFn } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
-// export const isAdminGuard: CanActivateFn = (route, state) => {
-//   // Backend API should have a route that checks if the user is an admin
-//   // If the user is an admin, return true
-// };
+export const isAdminGuard: CanActivateFn = (route, state) => {
+    // Route not found check the server on Railway
+    const authService = inject(AuthService);
+    return authService.checkAdmin();
+};
