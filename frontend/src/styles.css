@@ -1,2 +1,78 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
+
+body {
+    font-family: "Inter Tight", sans-serif;
+}
+
+:root {
+    /* Primary Colors */
+    --primary-900: #1E40AF;
+    --primary-800: #1E3A8A;
+    --primary-700: #1D4ED8;
+    --primary-600: #2563EB;
+    --primary-500: #3B82F6;
+    --primary-400: #60A5FA;
+    --primary-300: #93C5FD;
+    --primary-200: #BFDBFE;
+    --primary-100: #DBEAFE;
+    --primary-50: #EFF6FF;
+
+    /* Neutral Colors */
+    --neutral-900: #0F172A;
+    --neutral-800: #1E293B;
+    --neutral-700: #334155;
+    --neutral-600: #475569;
+    --neutral-500: #64748B;
+    --neutral-400: #94A3B8;
+    --neutral-300: #CBD5E1;
+    --neutral-200: #E2E8F0;
+    --neutral-100: #F1F5F9;
+    --neutral-50: #F8FAFC;
+
+    /* Semantic Colors */
+    --blue-900: #1E40AF;
+    --blue-800: #1E3A8A;
+    --blue-700: #1D4ED8;
+    --blue-600: #2563EB;
+    --blue-500: #3B82F6;
+    --blue-400: #60A5FA;
+    --blue-300: #93C5FD;
+    --blue-200: #BFDBFE;
+    --blue-100: #DBEAFE;
+    --blue-50: #EFF6FF;
+
+    --green-900: #14532D;
+    --green-800: #166534;
+    --green-700: #15803D;
+    --green-600: #16A34A;
+    --green-500: #22C55E;
+    --green-400: #4ADE80;
+    --green-300: #86EFAC;
+    --green-200: #BBF7D0;
+    --green-100: #DCFCE7;
+    --green-50: #F0FDF4;
+
+    --red-900: #7F1D1D;
+    --red-800: #991B1B;
+    --red-700: #B91C1C;
+    --red-600: #DC2626;
+    --red-500: #EF4444;
+    --red-400: #F87171;
+    --red-300: #FCA5A5;
+    --red-200: #FECACA;
+    --red-100: #FEE2E2;
+    --red-50: #FEF2F2;
+
+    --yellow-900: #713F12;
+    --yellow-800: #854D0E;
+    --yellow-700: #A16207;
+    --yellow-600: #CA8A04;
+    --yellow-500: #EAB308;
+    --yellow-400: #FACC15;
+    --yellow-300: #FDE047;
+    --yellow-200: #FEF08A;
+    --yellow-100: #FEF9C3;
+    --yellow-50: #FEFCE8;
+}
