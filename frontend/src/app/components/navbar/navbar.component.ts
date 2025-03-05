@@ -1,15 +1,14 @@
-
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
-
+import { LogoComponent } from "../logo/logo.component";
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink],
+  imports: [RouterLink, LogoComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements AfterViewInit {
   @ViewChild('mobileMenu') menu!: ElementRef;
 
   ngAfterViewInit(): void {
@@ -17,7 +16,10 @@ export class NavbarComponent {
   }
 
   toggleMenu() {
-    this.menu.nativeElement.classList.toggle('hidden');
+    if (this.menu && this.menu.nativeElement) {
+      this.menu.nativeElement.classList.toggle('hidden');
+    }
   }
+  
 
 }

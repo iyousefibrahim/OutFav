@@ -1,1 +1,34 @@
-<p>user-login works!</p>
+<app-breadcrumbs [title]="'Login'"></app-breadcrumbs>
+<form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
+
+    <div class="flex flex-col items-center my-10">
+        <div class="flex flex-col w-[40%] gap-y-3">
+
+            <label for="email">Email</label>
+            <input formControlName="email" class="focus:outline-none p-2 rounded-[5px] border-1 border-(--neutral-300)" id="email" type="text" pInputText />
+    
+            <label for="password">Password</label>
+            <div class="relative">
+                @if(loginForm.get('password')?.dirty && loginForm.get('password')?.value) {
+                    <i (click)="togglePasswordVisibility()" 
+                       class="pi absolute right-5 top-3"
+                       class="{{ passwordHidden ? 'pi-eye' : 'pi-eye-slash' }}">
+                    </i>
+                }
+                <input #passwordInput formControlName="password" class="focus:outline-none w-full p-2 rounded-[5px] border border-gray-300" id="password" type="password" pInputText />
+            </div>
+            
+        </div>
+        
+        <button [disabled]="loginForm.invalid || isLoading" class="disabled:cursor-not-allowed transition-all disabled:bg-(--neutral-600) bg-(--neutral-900) mt-6 text-white w-[40%] p-3 rounded-[5px] cursor-pointer" type="submit">
+            @if(isLoading){
+                <i class="pi pi-spin pi-spinner" style="font-size: 1.5rem"></i>
+            }@else{
+                Login
+            }
+        </button>
+        <p-toast />
+    </div>
+    
+</form>
+
