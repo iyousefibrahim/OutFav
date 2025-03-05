@@ -6,6 +6,6 @@ router.post('/register', authController.register);
 router.post('/login', authController.login);
 router.post('/change-password', authController.changePassword);
 router.post('/admin/login', authController.adminLogin);
-router.post('/admin/check-admin', authController.checkAdmin);
+router.get('/admin/check-admin', authController.checkAdmin);
 
 module.exports = router;
