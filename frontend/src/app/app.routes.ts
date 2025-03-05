@@ -10,7 +10,7 @@ import { notLoggedInGuard } from './core/guards/not-logged-in.guard';
 export const routes: Routes = [
 
     {
-        path: "", component: UserLayoutComponent, canActivate: [isLoggedInGuard], children: [
+        path: "", component: UserLayoutComponent, children: [
             { path: "", redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', loadComponent: () => import('./components/home/home.component').then(h => h.HomeComponent), title: "OutFav" },
         ]

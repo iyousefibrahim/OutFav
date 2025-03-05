@@ -1,1 +1,37 @@
-<p>admin-login works!</p>
+<form class="h-lvh" [formGroup]="adminForm" (ngSubmit)="loginSubmit()">
+    
+    <div class="flex h-full flex-col items-center justify-center">
+        <div class="flex items-center gap-x-2 mb-5">
+            <img class="w-6" src="assets/Logo.png" alt="OutFav Logo">
+            <h1 class="font-bold text-2xl">Admin</h1>
+        </div>
+        <div class="flex flex-col w-[70%] lg:w-[40%] gap-y-3">
+            <label for="email">Email</label>
+            <input formControlName="email" class="focus:outline-none p-2 rounded-[5px] border-1 border-(--neutral-300)" id="email" type="text" pInputText />
+    
+            <label for="password">Password</label>
+            <div class="relative">
+                @if(adminForm.get('password')?.dirty && adminForm.get('password')?.value) {
+                    <i (click)="togglePasswordVisibility()" 
+                       class="pi absolute right-5 top-3"
+                       class="{{ passwordHidden ? 'pi-eye' : 'pi-eye-slash' }}">
+                    </i>
+                }
+                <input #passwordInput formControlName="password" class="focus:outline-none w-full p-2 rounded-[5px] border border-gray-300" id="password" type="password" pInputText />
+            </div>
+            
+        </div>
+        
+        <button [disabled]="adminForm.invalid || isLoading" class="disabled:cursor-not-allowed transition-all disabled:bg-(--neutral-600) bg-(--neutral-900) mt-6 text-white w-[70%] lg:w-[40%] p-3 rounded-[5px] cursor-pointer" type="submit">
+            @if(isLoading){
+                <i class="pi pi-spin pi-spinner" style="font-size: 1.5rem"></i>
+            }@else{
+                Login
+            }
+        </button>
+        <p-toast />
+        <p class="mt-8 text-(--neutral-500)">Don't have an account? <span class="cursor-pointer underline" routerLink="/register">Register</span></p>
+    </div>
+
+    
+</form>

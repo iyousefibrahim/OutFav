@@ -3,16 +3,15 @@ import { BreadcrumbsComponent } from "../../breadcrumbs/breadcrumbs.component";
 import { AuthService } from '../../../core/services/auth.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { NgClass } from '@angular/common';
 import { Toast } from 'primeng/toast';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user-register',
-  imports: [BreadcrumbsComponent, ReactiveFormsModule, Toast],
+  imports: [BreadcrumbsComponent, ReactiveFormsModule, Toast, RouterLink],
   templateUrl: './user-register.component.html',
   styleUrl: './user-register.component.css',
-  providers: [MessageService, NgClass]
+  providers: [MessageService]
 })
 export class UserRegisterComponent {
   private readonly _authService = inject(AuthService);

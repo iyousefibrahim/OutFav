@@ -4,23 +4,22 @@ import { AuthService } from '../../../core/services/auth.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
-import { NgClass } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-user-login',
-  imports: [BreadcrumbsComponent, ReactiveFormsModule, Toast],
+  imports: [BreadcrumbsComponent, ReactiveFormsModule, Toast, RouterLink],
   templateUrl: './user-login.component.html',
   styleUrl: './user-login.component.css',
-  providers: [MessageService, NgClass]
+  providers: [MessageService]
 })
 export class UserLoginComponent {
   private readonly _authService = inject(AuthService);
   private readonly _FormBuilder = inject(FormBuilder);
   private readonly _MessageService = inject(MessageService);
   private readonly _Router = inject(Router);
-  
+
   @ViewChild('passwordInput') passwordInput!: ElementRef;
   @ViewChild('hideEye') hideEye!: ElementRef;
 
@@ -59,5 +58,5 @@ export class UserLoginComponent {
       this.passwordHidden = !isPassword;
     }
   }
-  
+
 }
