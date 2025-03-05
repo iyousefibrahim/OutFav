@@ -35,7 +35,7 @@ export class AdminLoginComponent {
     this.isLoading = true;
     if (this.adminForm.valid) {
       this._authService.adminLogin(this.adminForm.value).subscribe({
-        next: (res) => {
+        next: (res) => {    
           this.isLoading = false;
           this._MessageService.add({ severity: 'success', summary: 'Success', detail: "Welcome Admin!" });
           localStorage.setItem('token', JSON.stringify(res.data.token));

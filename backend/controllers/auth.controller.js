@@ -3,7 +3,7 @@ const asyncWrapper = require('../middlewares/asyncWrapper');
 const bcryptjs = require('bcryptjs');
 const appError = require('../utils/appError');
 const createJWT = require('../utils/createJWT');
-
+const jwt = require('jsonwebtoken');
 exports.register = asyncWrapper(async (req, res, next) => {
     const { name, email, password, address } = req.body;
 
@@ -90,5 +90,24 @@ exports.adminLogin = asyncWrapper(async (req, res, next) => {
     res.status(200).json({
         status: 'success',
         data: { token },
+    });
+});
+
+exports.checkAdmin = asyncWrapper(async (req, res, next) => {
+    const token = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+
+    if (!token) {
+        return next(new appError('No token provided', 403));
+    }
+
+    if (decoded.role !== 'admin') {
+        return next(new appError('Access denied', 403));
+    }
+
+    res.status(200).json({
+        status: 'success',
+        message: 'User is an admin',
+        data: { isAdmin: true },
     });
 });
