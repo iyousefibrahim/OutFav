@@ -10,6 +10,7 @@ import { LogoComponent } from "../logo/logo.component";
 })
 export class NavbarComponent implements AfterViewInit {
   @ViewChild('mobileMenu') menu!: ElementRef;
+  isLoggedIn: boolean = localStorage.getItem('token') ? true : false;
 
   ngAfterViewInit(): void {
     this.menu.nativeElement.classList.add('hidden');

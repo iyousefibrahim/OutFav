@@ -2,7 +2,7 @@
 <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
 
     <div class="flex flex-col items-center my-10">
-        <div class="flex flex-col w-[40%] gap-y-3">
+        <div class="flex flex-col w-[70%] lg:w-[40%] gap-y-3">
 
             <label for="email">Email</label>
             <input formControlName="email" class="focus:outline-none p-2 rounded-[5px] border-1 border-(--neutral-300)" id="email" type="text" pInputText />
@@ -20,7 +20,7 @@
             
         </div>
         
-        <button [disabled]="loginForm.invalid || isLoading" class="disabled:cursor-not-allowed transition-all disabled:bg-(--neutral-600) bg-(--neutral-900) mt-6 text-white w-[40%] p-3 rounded-[5px] cursor-pointer" type="submit">
+        <button [disabled]="loginForm.invalid || isLoading" class="disabled:cursor-not-allowed transition-all disabled:bg-(--neutral-600) bg-(--neutral-900) mt-6 text-white w-[70%] lg:w-[40%] p-3 rounded-[5px] cursor-pointer" type="submit">
             @if(isLoading){
                 <i class="pi pi-spin pi-spinner" style="font-size: 1.5rem"></i>
             }@else{

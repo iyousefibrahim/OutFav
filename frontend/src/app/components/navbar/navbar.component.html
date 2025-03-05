@@ -1,5 +1,5 @@
 <nav class="bg-white">
-    <div class="lg:max-w-[79%] mx-auto">
+    <div class="my-container">
         <div class="relative flex h-16 items-center justify-between">
 
             <!-- Mobile menu button -->
@@ -18,11 +18,8 @@
 
             <div class="flex items-center w-full justify-between">
 
-                
-                    <app-logo></app-logo>
-                
+                <app-logo></app-logo>
 
-                
                 <div class="hidden w-auto lg:flex justify-center items-center space-x-7">
                     <a routerLink="/home" class="font-medium hover:text-(--neutral-800) transition-colors" >Home</a>
                     <a routerLink="/categories" class="font-medium hover:text-(--neutral-800) transition-colors" >Categories</a>
@@ -38,8 +35,34 @@
                         <input type="search" name="search" id="search" class="focus:outline-none border-1 border-(--neutral-300) rounded-[10px] pl-5 md:px-10 py-3" placeholder="Search products">
                     </div>
 
-                    <img routerLink="/cart" class="w-6 cursor-pointer" src="assets/icons/Cart.png" alt="Cart Icon">
-                    <img class="w-6 cursor-pointer" src="assets/icons/User.png" alt="User Icon">
+                    @if (isLoggedIn) {
+                        <img routerLink="/cart" class="w-6 cursor-pointer" src="assets/icons/Cart.png" alt="Cart Icon">
+                    }
+                    <div class="relative group cursor-pointer">
+                        <img class="w-6" src="assets/icons/User.png" alt="User Icon">
+                        <div class="absolute -left-5 hidden lg:block top-5 gap-y-5 mt-2 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                            @if (!isLoggedIn) {
+                                <div class="icons py-5 px-9 w-full text-nowrap justify-center flex flex-col gap-y-6">
+                                    <p routerLink="/login">Login</p>
+                                    <p routerLink="/register">Register</p>
+                                </div>
+                            }
+                            @else {
+                                <div class="icons py-5 px-9 w-full text-nowrap justify-center flex flex-col gap-y-6">
+                                    <div class="flex w-full items-center justify-center">
+                                        <p>My Account</p>
+                                        <img src="assets/icons/User.svg" alt="User Image">
+                                    </div>
+                                    <div class="flex w-full items-center gap-x-1 justify-center">
+                                        <p>Logout</p>
+                                        <img src="assets/icons/logout.png" alt="Logout Image">
+                                    </div>
+                                </div>
+                                
+                            }
+                        </div>
+                    </div>                    
+                    
                 </div>
 
             </div>
