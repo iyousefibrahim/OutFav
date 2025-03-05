@@ -27,10 +27,15 @@ export class AuthService {
   }
 
   checkAdmin(): Observable<any> {
-    return this._HttpClient.get(`${baseUrl}/auth/admin/check-admin`, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    });
+    const token = localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token') as string) : null;
+    if (token) {
+      return this._HttpClient.get(`${baseUrl}/auth/admin/check-admin`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+    } else {
+      return of(null);
+    }
   }
 }

@@ -14,7 +14,6 @@ import { MessageService } from 'primeng/api';
   providers: [MessageService]
 })
 export class AdminLoginComponent {
-
   private readonly _authService = inject(AuthService);
   private readonly _FormBuilder = inject(FormBuilder);
   private readonly _MessageService = inject(MessageService);
@@ -40,7 +39,7 @@ export class AdminLoginComponent {
           this._MessageService.add({ severity: 'success', summary: 'Success', detail: "Welcome Admin!" });
           localStorage.setItem('token', JSON.stringify(res.data.token));
           setTimeout(() => {
-            this._Router.navigate(['/home']);
+            this._Router.navigate(['/admin/dashboard']);
           }, 2500);
         },
         error: (err) => {

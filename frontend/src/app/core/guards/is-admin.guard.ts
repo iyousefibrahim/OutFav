@@ -1,9 +1,17 @@
 import { inject } from '@angular/core';
-import { CanActivateFn } from '@angular/router';
+import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
-export const isAdminGuard: CanActivateFn = (route, state) => {
-    // Route not found check the server on Railway
+export const isAdminGuard: CanActivateFn = (route, state): Observable<boolean> => {
     const authService = inject(AuthService);
-    return authService.checkAdmin();
+    const router = inject(Router);
+    return authService.checkAdmin().pipe(
+        map(res => res.data.isAdmin),
+        catchError(err => {
+            router.navigate(['/admin/login']);
+            return of(false);
+        })
+    );
 };

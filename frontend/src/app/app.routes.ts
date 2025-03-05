@@ -26,7 +26,7 @@ export const routes: Routes = [
     },
 
     {
-        path: 'admin', component: AdminAuthLayoutComponent, children: [
+        path: 'admin', component: AdminAuthLayoutComponent, canActivate: [notLoggedInGuard], children: [
             { path: '', redirectTo: 'login', pathMatch: 'full' },
             { path: 'login', loadComponent: () => import('./components/admin/admin-login/admin-login.component').then(a => a.AdminLoginComponent) }
         ]
