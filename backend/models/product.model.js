@@ -13,7 +13,7 @@ const productSchema = new mongoose.Schema({
         required: [true, 'Please enter a price'],
     },
     sizes: {
-        type: String,
+        type: [String],
         enum: ['S', 'M', 'L'],
         required: true
     },
@@ -40,7 +40,7 @@ const productSchema = new mongoose.Schema({
         trim: true,
     },
     colors: {
-        type: String,
+        type: [String],
         enum: ['Red', 'Blue', 'Green', 'Yellow', 'Black', 'White'],
         required: true
     },
