@@ -1,0 +1,14 @@
+<section class="bg-(--neutral-100)">
+    <div class="my-container py-16">
+        <div class="flex justify-between">
+            <div class="w-[50%] flex flex-col gap-y-4">
+                <h3 class="font-bold">Join Our Newsletter</h3>
+                <p class="font-medium text-(--neutral-500)">We love to surprise our subscribers with occasional gifts.</p>
+            </div>
+            <div class="w-[50%] flex items-center justify-between">
+                <input placeholder="Your email address" class="focus:outline-none w-[75%] p-2 rounded-[5px] border border-gray-300" type="email" pInputText />
+                <app-button [title]="'Subscribe'" [bgColor]="'bg-(--neutral-900)'" [buttonPadding]="'10px 25px'" [textColorClass]="'text-white'" [buttonWidth]="'w-[50%]'" [routerLink]="'/home'"></app-button>
+            </div>
+        </div>
+    </div>
+</section>

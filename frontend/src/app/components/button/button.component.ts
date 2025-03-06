@@ -13,7 +13,7 @@ export class ButtonComponent {
   @Input({ required: true }) textColorClass!: string;
   @Input({ required: true }) buttonWidth: string = 'auto';
   @Input({ required: true }) buttonPadding: string = '12px 24px';
-  @Input({ required: true }) imageSrc: string = '';
+  @Input() imageSrc: string = '';
   @Input({ required: true }) bgColor!: string;
-  @Input({ required: true }) routerLink!: string;
+  @Input() routerLink!: string;
 }
