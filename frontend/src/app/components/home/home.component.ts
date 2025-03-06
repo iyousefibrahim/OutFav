@@ -9,6 +9,6 @@ import { ProductItemComponent } from "../products/product-item/product-item.comp
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent{
 
 }
