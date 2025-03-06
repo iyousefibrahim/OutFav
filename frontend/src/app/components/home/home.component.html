@@ -1,5 +1,12 @@
 <app-main-hero></app-main-hero>
 <app-features></app-features>
-<div class="my-container py-5">
-    <app-product-item [getSomeProducts]="true" [productsCount]="4"></app-product-item>
-</div>
+<section class="py-5">
+    
+    <div class="my-container">
+        <h1 class="text-center text-[20px] pb-20 font-light text-(--neutral-500)">SHOP NOW</h1>
+        <app-product-item [getSomeProducts]="true" [productsCount]="4"></app-product-item>
+    </div>
+
+    <app-categories-cta></app-categories-cta>
+
+</section>
