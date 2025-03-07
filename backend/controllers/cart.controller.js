@@ -21,21 +21,21 @@ exports.getAllCart = asyncWrapper(async (req, res, next) => {
 
 exports.addToCart = asyncWrapper(async (req, res, next) => {
     const userId = req.user.id;
-    const { productId } = req.body;
+    const { productId, quantity = 1 } = req.body;
 
     let cart = await Cart.findOne({ userId });
 
     if (!cart) {
-        cart = await Cart.create({ userId, products: [{ productId, quantity: 1 }] });
+        cart = await Cart.create({ userId, products: [{ productId, quantity }] });
     } else {
         const productIndex = cart.products.findIndex(
             (p) => p.productId.toString() === productId
         );
 
         if (productIndex > -1) {
-            cart.products[productIndex].quantity += 1;
+            cart.products[productIndex].quantity += quantity;
         } else {
-            cart.products.push({ productId, quantity: 1 });
+            cart.products.push({ productId, quantity });
         }
     }
 
