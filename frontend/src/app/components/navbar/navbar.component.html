@@ -38,17 +38,20 @@
                     @if (isLoggedIn) {
                         <img routerLink="/cart" class="w-6 cursor-pointer" src="assets/icons/Cart.png" alt="Cart Icon">
                     }
-                    <div class="relative group cursor-pointer">
-                        <img class="w-6" src="assets/icons/User.png" alt="User Icon">
-                        <div class="absolute z-50 -left-2 lg:-left-4 xl:-left-2 hidden lg:block top-5 gap-y-5 mt-2 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div class="relative cursor-pointer">
+                        <img class="w-6" src="assets/icons/User.png" alt="User Icon" (click)="toggleDropdown($event)">
+                        <div class="absolute z-50 -left-2 lg:-left-4 xl:-left-2 top-5 gap-y-5 mt-2 bg-gray-800 text-white text-sm rounded 
+                                    p-5 transition-opacity"
+                             [class.hidden]="!isDropdownOpen"
+                             (mouseleave)="closeDropdown()">             
                             @if (!isLoggedIn) {
-                                <div class="icons py-5 px-9 w-full text-nowrap justify-center flex flex-col gap-y-6">
+                                <div class="icons w-full text-nowrap justify-center flex flex-col gap-y-6">
                                     <p routerLink="/login">Login</p>
                                     <p routerLink="/register">Register</p>
                                 </div>
                             }
                             @else {
-                                <div class="icons py-5 px-9 w-full text-nowrap justify-center flex flex-col gap-y-6">
+                                <div class="icons w-full text-nowrap justify-center flex flex-col gap-y-6">
                                     <div class="flex w-full items-center justify-center">
                                         <p>My Account</p>
                                         <img src="assets/icons/User.svg" alt="User Image">
@@ -58,11 +61,9 @@
                                         <img src="assets/icons/logout.png" alt="Logout Image">
                                     </div>
                                 </div>
-                                
                             }
                         </div>
-                    </div>                    
-                    
+                    </div>       
                 </div>
 
             </div>

@@ -14,6 +14,7 @@ body {
 }
 
 :root {
+    --white:#ffffff;
     /* Primary Colors */
     --primary-900: #1E40AF;
     --primary-800: #1E3A8A;
