@@ -1,4 +1,5 @@
 const Cart = require('../models/cart.model');
+const Product = require('../models/product.model');
 const AppError = require('../utils/appError');
 const asyncWrapper = require('../middlewares/asyncWrapper');
 const sanitizeCart = require('../utils/sanitizeCart');
@@ -21,21 +22,49 @@ exports.getAllCart = asyncWrapper(async (req, res, next) => {
 
 exports.addToCart = asyncWrapper(async (req, res, next) => {
     const userId = req.user.id;
-    const { productId, quantity = 1 } = req.body;
+    let { productId, quantity = 1, selectedColor, selectedSize } = req.body;
+
+    if (!selectedColor || !selectedSize) {
+        return res.status(400).json({
+            status: 'fail',
+            message: 'selectedColor and selectedSize are required'
+        });
+    }
+
+    if (Array.isArray(selectedColor)) {
+        selectedColor = selectedColor[0];
+    }
+    if (Array.isArray(selectedSize)) {
+        selectedSize = selectedSize[0];
+    }
+
+    const product = await Product.findById(productId);
+    if (!product) {
+        return res.status(404).json({ status: 'fail', message: 'Product not found' });
+    }
+
+    if (!product.colors.includes(selectedColor) || !product.sizes.includes(selectedSize)) {
+        return res.status(400).json({ status: 'fail', message: 'Invalid color or size' });
+    }
 
     let cart = await Cart.findOne({ userId });
 
     if (!cart) {
-        cart = await Cart.create({ userId, products: [{ productId, quantity }] });
+        cart = await Cart.create({ 
+            userId, 
+            products: [{ productId, quantity, selectedColor, selectedSize }] 
+        });
     } else {
         const productIndex = cart.products.findIndex(
-            (p) => p.productId.toString() === productId
+            (p) => p.productId.toString() === productId && 
+                   p.selectedColor === selectedColor && 
+                   p.selectedSize === selectedSize
         );
 
         if (productIndex > -1) {
             cart.products[productIndex].quantity += quantity;
         } else {
-            cart.products.push({ productId, quantity });
+            cart.products.push({ productId, quantity, selectedColor, selectedSize });
         }
     }
 
@@ -46,7 +75,7 @@ exports.addToCart = asyncWrapper(async (req, res, next) => {
         status: 'success',
         message: 'Product added successfully to your cart',
         data: {
-            cart: sanitizeCart(cart)
+            cart
         }
     });
 });

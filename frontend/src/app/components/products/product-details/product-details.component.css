@@ -1,0 +1,12 @@
+input[type="radio"] {
+  display: none;
+}
+
+.selected {
+  border: 2px solid rgb(255, 255, 255)!important;
+  outline: 3px solid black;
+}
+
+.selected[style*="background-color: white"] {
+  border: 1px solid #ccc !important;
+}

@@ -10,10 +10,10 @@ import { RouterLink } from '@angular/router';
 })
 export class ButtonComponent {
   @Input({ required: true }) title!: string;
-  @Input({ required: true }) textColorClass!: string;
-  @Input({ required: true }) buttonWidth: string = 'auto';
-  @Input({ required: true }) buttonPadding: string = '12px 24px';
+  @Input() textColorClass: string = "white";
+  @Input() buttonWidth: string = 'auto';
+  @Input() buttonPadding: string = '12px 24px';
   @Input() imageSrc: string = '';
-  @Input({ required: true }) bgColor!: string;
+  @Input() bgColor: string = "bg-(--neutral-800)";
   @Input() routerLink!: string;
 }

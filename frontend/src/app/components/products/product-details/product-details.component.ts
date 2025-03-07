@@ -8,15 +8,19 @@ import { StockStatusComponent } from "../stock-status/stock-status.component";
 import { ReviewsCountComponent } from "../../reviews/reviews-count/reviews-count.component";
 import { ReviewsService } from '../../../core/services/reviews.service';
 import { IReview } from '../../../core/interfaces/ireview';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, NgStyle } from '@angular/common';
 import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
+import { ButtonComponent } from "../../button/button.component";
+import { FormsModule } from '@angular/forms';
+import { CartService } from '../../../core/services/cart.service';
 
 @Component({
   selector: 'app-product-details',
   imports: [
     NewsletterComponent, BreadcrumbsComponent, StockStatusComponent,
-    ReviewsCountComponent, CurrencyPipe, Toast
+    ReviewsCountComponent, CurrencyPipe, Toast,
+    ButtonComponent, FormsModule, NgStyle
   ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css',
@@ -27,10 +31,13 @@ export class ProductDetailsComponent implements OnInit {
   private readonly _ReviewsService = inject(ReviewsService);
   private readonly _ActivatedRoute = inject(ActivatedRoute);
   private readonly _MessageService = inject(MessageService);
+  private readonly _CartService = inject(CartService);
 
   productId: WritableSignal<string> = signal('');
   productData = signal<IProduct>(null as unknown as IProduct);
   reviewData = signal<IReview>(null as unknown as IReview);
+  selectedColor!: string;
+  selectedSize!: string;
 
   getProductById() {
     this._ProductsService.getProductById(this.productId()).subscribe({
@@ -64,6 +71,21 @@ export class ProductDetailsComponent implements OnInit {
     }).catch(err => {
       this._MessageService.add({ severity: 'error', summary: 'Error', detail: 'Something happened!', life: 5000 });
     });
+  }
+
+  addToCart(productId: string) {
+    if (this.selectedColor || this.selectedSize) {
+      this._CartService.AddToCart(productId).subscribe({
+        next: (res) => {
+          console.log(res);
+
+        },
+        error: (err) => {
+          console.log(err);
+
+        }
+      });
+    }
   }
 
   ngOnInit(): void {

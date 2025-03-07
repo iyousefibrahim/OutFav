@@ -14,7 +14,7 @@ const productSchema = new mongoose.Schema({
     },
     sizes: {
         type: [String],
-        enum: ['S', 'M', 'L'],
+        enum: ['S', 'M', 'L', 'XL', 'XLL'],
         required: true
     },
     stockStatus: {
@@ -41,7 +41,6 @@ const productSchema = new mongoose.Schema({
     },
     colors: {
         type: [String],
-        enum: ['Red', 'Blue', 'Green', 'Yellow', 'Black', 'White'],
         required: true
     },
     availableQuantity: {

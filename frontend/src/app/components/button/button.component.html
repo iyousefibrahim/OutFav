@@ -1,4 +1,4 @@
-<button routerLink="{{routerLink}}" [ngClass]="[textColorClass, bgColor]"
+<button [routerLink]="routerLink !== '' ? routerLink : null" [ngClass]="[textColorClass, bgColor]"
         [ngStyle]="{
           'width': buttonWidth,
           'padding': buttonPadding
