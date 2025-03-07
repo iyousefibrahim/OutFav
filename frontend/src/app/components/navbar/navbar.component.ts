@@ -21,6 +21,11 @@ export class NavbarComponent implements AfterViewInit {
       this.menu.nativeElement.classList.toggle('hidden');
     }
   }
+
+  logOut(){
+    localStorage.removeItem('token');
+    this.isLoggedIn = false;
+  }
   
 
 }

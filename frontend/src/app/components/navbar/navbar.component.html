@@ -53,7 +53,7 @@
                                         <p>My Account</p>
                                         <img src="assets/icons/User.svg" alt="User Image">
                                     </div>
-                                    <div class="flex w-full items-center gap-x-1 justify-center">
+                                    <div (click)="logOut()" class="flex w-full items-center gap-x-1 justify-center">
                                         <p>Logout</p>
                                         <img src="assets/icons/logout.png" alt="Logout Image">
                                     </div>
@@ -73,15 +73,19 @@
     <!-- Mobile menu -->
     <div class="lg:hidden w-full flex justify-end" #mobileMenu>
         <div class="space-y-1 px-2 pt-2 pb-3 flex w-full flex-wrap flex-col">
-            <div class="flex gap-3">
-                <img routerLink="/cart" class="w-6 cursor-pointer" src="assets/icons/Cart.png" alt="Cart Icon">
-                <img class="w-6 cursor-pointer" src="assets/icons/User.png" alt="User Icon">
-            </div>
             <div class="w-25 flex flex-col">
-            <a routerLink="/home" class="font-medium cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors" >Home</a>
-            <a routerLink="/categories" class="font-medium cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors" >Categories</a>
-            <a routerLink="/about" class="font-medium cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors">About</a>
-            <a routerLink="/contact" class="font-medium cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors" >Contact</a>
+                <a routerLink="/home" (click)="toggleMenu()" class="font-medium cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors">Home</a>
+                <a routerLink="/categories" (click)="toggleMenu()" class="font-medium cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors">Categories</a>
+                <a routerLink="/about" (click)="toggleMenu()" class="font-medium cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors">About</a>
+                <a routerLink="/contact" (click)="toggleMenu()" class="font-medium cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors">Contact</a>                
+            @if (isLoggedIn) {
+                <a routerLink="/account" (click)="toggleMenu()" class="font-medium text-nowrap cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors" >My Account</a>
+                <a routerLink="/cart" (click)="toggleMenu()" class="font-medium cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors">Cart</a>
+                <a (click)="logOut(); toggleMenu()" class="font-medium cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors">LogOut</a>
+            }@else{
+                <a routerLink="/login" (click)="toggleMenu()" class="font-medium text-nowrap cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors" >Login</a>
+                <a routerLink="/register" (click)="toggleMenu()" class="font-medium cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors">Register</a>
+            }
             </div>
         </div>
     </div>
