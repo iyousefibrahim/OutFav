@@ -3,10 +3,16 @@ input[type="radio"] {
 }
 
 .selected {
-  border: 2px solid rgb(255, 255, 255)!important;
+  border: 2px solid rgb(255, 255, 255) !important;
   outline: 3px solid black;
 }
 
 .selected[style*="background-color: white"] {
   border: 1px solid #ccc !important;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+  display: block;
 }

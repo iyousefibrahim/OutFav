@@ -16,4 +16,5 @@ export class ButtonComponent {
   @Input() imageSrc: string = '';
   @Input() bgColor: string = "bg-(--neutral-800)";
   @Input() routerLink!: string;
+  @Input() disabledStatus: boolean = false;
 }

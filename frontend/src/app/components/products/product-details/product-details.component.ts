@@ -33,17 +33,23 @@ export class ProductDetailsComponent implements OnInit {
   private readonly _MessageService = inject(MessageService);
   private readonly _CartService = inject(CartService);
 
-  productId: WritableSignal<string> = signal('');
   productData = signal<IProduct>(null as unknown as IProduct);
   reviewData = signal<IReview>(null as unknown as IReview);
-  selectedColor!: string;
-  selectedSize!: string;
+
+  productId: WritableSignal<string> = signal('');
+  selectedColor: WritableSignal<string> = signal('');
+  selectedSize: WritableSignal<string> = signal('');
+
+  quantity: WritableSignal<number> = signal(1);
+  min: WritableSignal<number> = signal(1);
+  max: WritableSignal<number> = signal(99);
+  quantityChange: WritableSignal<number> = signal(0);
 
   getProductById() {
     this._ProductsService.getProductById(this.productId()).subscribe({
       next: (res) => {
-        console.log(res);
         this.productData.set(res.data);
+        this.max.set(res.data.availableQuantity);
       },
       error: (err) => {
         console.log(err);
@@ -74,11 +80,10 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart(productId: string) {
-    if (this.selectedColor || this.selectedSize) {
-      this._CartService.AddToCart(productId).subscribe({
+    if (this.selectedColor && this.selectedSize) {
+      this._CartService.addToCart(productId, this.quantity(), this.selectedColor(), this.selectedSize()).subscribe({
         next: (res) => {
-          console.log(res);
-
+          console.log("added to cart", res);
         },
         error: (err) => {
           console.log(err);
@@ -86,6 +91,28 @@ export class ProductDetailsComponent implements OnInit {
         }
       });
     }
+  }
+
+  increase() {
+    if (this.quantity() < this.max()) {
+      this.quantity.update(q => q + 1);
+      this.quantityChange.set(this.quantity());
+    }
+  }
+
+  decrease() {
+    if (this.quantity() > this.min()) {
+      this.quantity.update(q => q - 1);
+      this.quantityChange.set(this.quantity());
+    }
+  }
+
+  onInputChange(event: any) {
+    let value = event.target.value;
+    if (value < this.min()) value = this.min();
+    if (value > this.max()) value = this.max();
+    this.quantity = value;
+    this.quantityChange.set(this.quantity());
   }
 
   ngOnInit(): void {
@@ -98,7 +125,6 @@ export class ProductDetailsComponent implements OnInit {
         console.log(err);
       }
     });
-
     this.getProductById();
     this.getProductReviewById();
   }

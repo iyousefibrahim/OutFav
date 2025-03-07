@@ -10,7 +10,7 @@ export class ProductsService {
 
   constructor(private _HttpClient: HttpClient) { }
 
-  token = localStorage.getItem('token');
+  token = JSON.parse(localStorage.getItem('token') ?? '');
 
   getAllProducts(): Observable<any> {
     return this._HttpClient.get(`${baseUrl}/products`, {
