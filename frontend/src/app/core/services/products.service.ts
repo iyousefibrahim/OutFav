@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal, WritableSignal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { baseUrl } from '../../environment/baseUrl';
 
@@ -11,6 +11,7 @@ export class ProductsService {
   constructor(private _HttpClient: HttpClient) { }
 
   token = JSON.parse(localStorage.getItem('token') ?? '');
+  productDescription: WritableSignal<string> = signal('');
 
   getAllProducts(): Observable<any> {
     return this._HttpClient.get(`${baseUrl}/products`, {
@@ -52,5 +53,13 @@ export class ProductsService {
       }
     });
   }
-  
+
+  getProductDescription() {
+    return this.productDescription();
+  }
+
+  setProductDescription(desc: string) {
+    this.productDescription.set(desc);
+  }
+
 }

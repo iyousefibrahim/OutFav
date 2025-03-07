@@ -2,7 +2,7 @@
     <app-breadcrumbs padding="2" [url]="productData().title" backgroundVarColor="white"></app-breadcrumbs>
 
     <div class="my-container">
-        <div class="flex flex-wrap lg:flex-nowrap xl:gap-x-27 lg:gap-x-5 py-3 gap-y-6 lg:gap-y-0 pb-16">
+        <div class="flex flex-wrap lg:flex-nowrap xl:gap-x-27 lg:gap-x-5 py-3 gap-y-6 lg:gap-y-0">
 
             <div class="flex justify-center xl:justify-start w-full lg:w-[35%]">
                 <img class="w-[80%] lg:w-full" [src]="productData().productImage" [alt]="productData().title">
@@ -61,28 +61,52 @@
 
                 </div>
 
-                                                                      
+
                 <p class="text-(--neutral-500) font-medium">QUANTITY</p>
                 <div class="flex items-center border border-(--neutral-200) w-32 px-20 rounded-[5px] justify-center">
-                    <button [disabled]="quantity() === min()" (click)="decrease()" class="px-3 disabled:cursor-not-allowed py-1 text-(--neutral-600) cursor-pointer font-semibold text-3xl">-</button>
-                    <input 
-                      type="text" 
-                      [value]="quantity()" 
-                      (input)="onInputChange($event)"
-                      [max]="productData().availableQuantity"
-                      min="1"
-                      class="text-center w-12 font-semibold border-none outline-none" 
-                    />
-                    <button [disabled]="quantity() === max()" (click)="increase()" class="px-3 disabled:cursor-not-allowed py-1 text-(--neutral-600) cursor-pointer font-medium text-3xl">+</button>
+                    <button [disabled]="quantity() === min()" (click)="decrease()"
+                        class="px-3 disabled:cursor-not-allowed py-1 text-(--neutral-600) cursor-pointer font-semibold text-3xl">-</button>
+                    <input type="text" [value]="quantity()" (input)="onInputChange($event)"
+                        [max]="productData().availableQuantity" min="1"
+                        class="text-center w-12 font-semibold border-none outline-none" />
+                    <button [disabled]="quantity() === max()" (click)="increase()"
+                        class="px-3 disabled:cursor-not-allowed py-1 text-(--neutral-600) cursor-pointer font-medium text-3xl">+</button>
                 </div>
 
-                <app-button [disabledStatus]="!selectedColor || !selectedSize || !quantity || quantity() > productData().availableQuantity"  (click)="addToCart(productData()._id)" title="Add To Cart" textColorClass="text-white"
-                  buttonWidth="200px" bgColor="bg-(--neutral-900)" buttonPadding="10px 15px">
+                <app-button
+                    [disabledStatus]="!selectedColor || !selectedSize || !quantity || quantity() > productData().availableQuantity"
+                    (click)="addToCart(productData()._id)" title="Add To Cart" textColorClass="text-white"
+                    buttonWidth="200px" bgColor="bg-(--neutral-900)" buttonPadding="10px 15px">
                 </app-button>
 
             </div>
 
         </div>
+
+        <div class="flex py-44 gap-x-8">
+
+            <div class="w-[30%] flex flex-col justify-center gap-y-6">
+
+                <button routerLink="description" 
+                        routerLinkActive="bg-(--neutral-100)"
+                    class="text-(--neutral-600) flex items-center gap-x-3 transition-all self-start cursor-pointer w-[65%] py-1.5 pl-3 rounded-[6px]">
+                    <img src="assets/icons/More.svg" alt="More Icon">Description
+                </button>
+
+                <button routerLink="reviews" 
+                        routerLinkActive="bg-(--neutral-100)"
+                    class="text-(--neutral-600) flex items-center gap-x-3 transition-all self-start cursor-pointer w-[65%] py-1.5 pl-3 rounded-[6px]">
+                    <img src="assets/icons/empty-star.svg" alt="Empty-star Icon">Reviews
+                </button>
+
+            </div>
+
+            <div class="w-[60%]">
+                <router-outlet></router-outlet>
+            </div>
+
+        </div>
+
     </div>
 
     <app-newsletter></app-newsletter>

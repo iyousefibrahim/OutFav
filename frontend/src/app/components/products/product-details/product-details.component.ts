@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { NewsletterComponent } from "../../newsletter/newsletter.component";
 import { ProductsService } from '../../../core/services/products.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { BreadcrumbsComponent } from "../../breadcrumbs/breadcrumbs.component";
 import { IProduct } from '../../../core/interfaces/iproduct';
 import { StockStatusComponent } from "../stock-status/stock-status.component";
@@ -20,7 +20,8 @@ import { CartService } from '../../../core/services/cart.service';
   imports: [
     NewsletterComponent, BreadcrumbsComponent, StockStatusComponent,
     ReviewsCountComponent, CurrencyPipe, Toast,
-    ButtonComponent, FormsModule, NgStyle
+    ButtonComponent, FormsModule, NgStyle,
+    RouterLink, RouterOutlet, RouterLinkActive
   ],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css',
@@ -50,6 +51,7 @@ export class ProductDetailsComponent implements OnInit {
       next: (res) => {
         this.productData.set(res.data);
         this.max.set(res.data.availableQuantity);
+        this._ProductsService.setProductDescription(this.productData().description);
       },
       error: (err) => {
         console.log(err);

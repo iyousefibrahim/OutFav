@@ -14,7 +14,13 @@ export const routes: Routes = [
         path: "", component: UserLayoutComponent, children: [
             { path: "", redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', loadComponent: () => import('./components/home/home.component').then(h => h.HomeComponent), title: "OutFav" },
-            { path: "product/:id", loadComponent: () => import('./components/products/product-details/product-details.component').then(p => p.ProductDetailsComponent) }
+            {
+                path: "product/:id", loadComponent: () => import('./components/products/product-details/product-details.component').then(p => p.ProductDetailsComponent), children: [
+                    { path: "", redirectTo: 'description', pathMatch: 'full' },
+                    { path: 'description', loadComponent: () => import('./components/products/product-description/product-description.component').then(p => p.ProductDescriptionComponent) },
+                    { path: 'reviews', loadComponent: () => import('./components/reviews/reviews.component').then(r => r.ReviewsComponent) }
+                ]
+            }
         ]
     },
 
