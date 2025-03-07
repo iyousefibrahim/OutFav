@@ -5,7 +5,7 @@ const asyncWrapper = require('../middlewares/asyncWrapper');
 
 exports.getAllReviews = asyncWrapper(async (req, res, next) => {
     const reviews = await Review.find();
-    sanitizedReviews = reviews.map(review => {
+    const sanitizedReviews = reviews.map(review => {
         return {
             reviewId: review._id,
             userId: review.userId,
@@ -26,7 +26,11 @@ exports.getAllReviews = asyncWrapper(async (req, res, next) => {
 
 exports.getProductReviewsByProductId = asyncWrapper(async (req, res, next) => {
     const reviews = await Review.find({ productId: req.params.productId });
-    sanitizedReviews = reviews.map(review => {
+    
+    const avgRating = reviews.length > 0 ? 
+    (reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length).toFixed(1): 0;
+
+    const sanitizedReviews = reviews.map(review => {
         return {
             reviewId: review._id,
             userId: review.userId,
@@ -41,6 +45,8 @@ exports.getProductReviewsByProductId = asyncWrapper(async (req, res, next) => {
 
     res.status(200).json({
         status: 'success',
+        avgRating: avgRating,
+        reviewCount: reviews.length,
         data: sanitizedReviews,
     });
 });
