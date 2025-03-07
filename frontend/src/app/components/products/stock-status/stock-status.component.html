@@ -1,0 +1,4 @@
+<p [ngClass]="{
+    'text-red-600': stockStatus.toUpperCase() === 'OUT OF STOCK'
+}" class="border-1 px-3 text-[12px] py-1 font-medium border-(--neutral-300) rounded-2xl ">{{stockStatus.toUpperCase()}}
+</p>

@@ -4,7 +4,7 @@
             <img [routerLink]="'/product/' + product._id" class="cursor-pointer" [src]="product.productImage" alt="{{product.title}}">
             <h2 [routerLink]="'/product/' + product._id"  class="font-medium cursor-pointer pt-7">{{product.title}}</h2>
             <div class="flex gap-x-4 pt-3">
-                <p class="border-1 px-3 text-[12px] py-1 font-medium border-(--neutral-300) rounded-2xl ">{{product.stockStatus.toUpperCase()}}</p>
+                <app-stock-status [stockStatus]="product.stockStatus"></app-stock-status>
                 <p class="text-(--neutral-500)">{{ product.price | currency }}</p>
             </div>
         </div>

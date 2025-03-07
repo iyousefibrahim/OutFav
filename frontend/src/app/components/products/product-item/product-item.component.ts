@@ -4,10 +4,11 @@ import { IProduct } from '../../../core/interfaces/iproduct';
 import { CurrencyPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { StockStatusComponent } from "../stock-status/stock-status.component";
 
 @Component({
   selector: 'app-product-item',
-  imports: [CurrencyPipe, RouterLink],
+  imports: [CurrencyPipe, RouterLink, StockStatusComponent],
   templateUrl: './product-item.component.html',
   styleUrl: './product-item.component.css'
 })
