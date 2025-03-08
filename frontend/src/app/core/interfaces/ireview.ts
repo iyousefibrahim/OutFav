@@ -1,14 +1,11 @@
 export interface IReview {
-}
-
-export interface IReview {
     status: string
     avgRating: string
     reviewCount: number
-    data: Data[]
+    data: IReviewData[]
 }
 
-export interface Data {
+export interface IReviewData {
     reviewId: string
     userId: string
     productId: string

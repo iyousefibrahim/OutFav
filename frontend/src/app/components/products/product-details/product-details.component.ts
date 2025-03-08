@@ -61,13 +61,11 @@ export class ProductDetailsComponent implements OnInit {
 
   getProductReviewById() {
     this._ReviewsService.getProductsReviewById(this.productId()).subscribe({
-      next: (res) => {
+      next:(res)=>{
+        console.log(res,"details");
         this.reviewData.set(res);
-      },
-      error: (err) => {
-        console.log(err);
       }
-    });
+    })
   }
 
   copyProductLink() {
