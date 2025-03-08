@@ -1,114 +1,116 @@
-<section>
-    <app-breadcrumbs padding="2" [url]="productData().title" backgroundVarColor="white"></app-breadcrumbs>
-
-    <div class="my-container">
-        <div class="flex flex-wrap lg:flex-nowrap xl:gap-x-27 lg:gap-x-5 py-3 gap-y-6 lg:gap-y-0">
-
-            <div class="flex justify-center xl:justify-start w-full lg:w-[35%]">
-                <img class="w-[80%] lg:w-full" [src]="productData().productImage" [alt]="productData().title">
-            </div>
-
-            <div class="w-full lg:w-[45%] xl:w-[55%] flex flex-col gap-y-5">
-
-                <div class="flex justify-between">
-                    <h1 class="font-bold text-3xl ">{{productData().title}}</h1>
-                    <img class="cursor-pointer" src="assets/icons/share.svg" alt="Share Icon"
-                        (click)="copyProductLink()">
+@if (productData()) {
+    <section>
+        <app-breadcrumbs padding="2" [url]="productData().title" backgroundVarColor="white"></app-breadcrumbs>
+    
+        <div class="my-container">
+            <div class="flex flex-wrap lg:flex-nowrap xl:gap-x-27 lg:gap-x-5 py-3 gap-y-6 lg:gap-y-0">
+    
+                <div class="flex justify-center xl:justify-start w-full lg:w-[35%]">
+                    <img class="w-[80%] lg:w-full" [src]="productData().productImage" [alt]="productData().title">
                 </div>
-
-                <div class="flex gap-x-3">
-                    <app-reviews-count [avgRate]="reviewData().avgRating"
-                        [reviewsCount]="reviewData().reviewCount"></app-reviews-count>
-                    <app-stock-status [stockStatus]="productData().stockStatus"></app-stock-status>
-                </div>
-
-                <p class="font-semibold text-[20px]">{{productData().price | currency}}</p>
-
-                <div>
-                    <p class="text-(--neutral-500) font-medium">AVAILABLE COLORS</p>
-                    <div class="flex gap-x-3 pt-5">
-                        @for (color of productData().colors; track color) {
-                        <label>
-                            <input type="radio" name="productColor" [value]="color" [(ngModel)]="selectedColor">
-                            <span [ngStyle]="{
-                                'background-color': color.toLocaleLowerCase(),
-                                'border': color.toLowerCase() === 'white' ? '1px solid #ccc' : 'none'
-                                }" class="px-[18.5px] border-white border-2 py-2 rounded-full"
-                                [class.selected]="selectedColor() === color">
-                            </span>
-                        </label>
-                        }
+    
+                <div class="w-full lg:w-[45%] xl:w-[55%] flex flex-col gap-y-5">
+    
+                    <div class="flex justify-between">
+                        <h1 class="font-bold text-3xl ">{{productData().title}}</h1>
+                        <img class="cursor-pointer" src="assets/icons/share.svg" alt="Share Icon"
+                            (click)="copyProductLink()">
                     </div>
-                </div>
-
-                <div>
-                    <p class="text-(--neutral-500) font-medium">SELECT SIZE</p>
-
-                    <div class="flex gap-x-3 pt-5">
-                        @for (size of productData().sizes; track size) {
-                        <label>
-                            <input type="radio" name="productSize" [value]="size" [(ngModel)]="selectedSize"
-                                class="hidden">
-                            <span
-                                class="flex items-center justify-center w-12 h-12 border-2 border-gray-300 rounded-lg text-lg font-bold text-gray-600 transition-all duration-300 cursor-pointer hover:border-black"
-                                [class]="selectedSize() === size ? 'border-black bg-gray-100' : ''">
-                                {{ size }}
-                            </span>
-                        </label>
-                        }
+    
+                    <div class="flex gap-x-3">
+                        <app-reviews-count [avgRate]="reviewData().avgRating"
+                            [reviewsCount]="reviewData().reviewCount"></app-reviews-count>
+                        <app-stock-status [stockStatus]="productData().stockStatus"></app-stock-status>
                     </div>
-
-
+    
+                    <p class="font-semibold text-[20px]">{{productData().price | currency}}</p>
+    
+                    <div>
+                        <p class="text-(--neutral-500) font-medium">AVAILABLE COLORS</p>
+                        <div class="flex gap-x-3 pt-5">
+                            @for (color of productData().colors; track color) {
+                            <label>
+                                <input type="radio" name="productColor" [value]="color" [(ngModel)]="selectedColor">
+                                <span [ngStyle]="{
+                                    'background-color': color.toLocaleLowerCase(),
+                                    'border': color.toLowerCase() === 'white' ? '1px solid #ccc' : 'none'
+                                    }" class="px-[18.5px] border-white border-2 py-2 rounded-full"
+                                    [class.selected]="selectedColor() === color">
+                                </span>
+                            </label>
+                            }
+                        </div>
+                    </div>
+    
+                    <div>
+                        <p class="text-(--neutral-500) font-medium">SELECT SIZE</p>
+    
+                        <div class="flex gap-x-3 pt-5">
+                            @for (size of productData().sizes; track size) {
+                            <label>
+                                <input type="radio" name="productSize" [value]="size" [(ngModel)]="selectedSize"
+                                    class="hidden">
+                                <span
+                                    class="flex items-center justify-center w-12 h-12 border-2 border-gray-300 rounded-lg text-lg font-bold text-gray-600 transition-all duration-300 cursor-pointer hover:border-black"
+                                    [class]="selectedSize() === size ? 'border-black bg-gray-100' : ''">
+                                    {{ size }}
+                                </span>
+                            </label>
+                            }
+                        </div>
+    
+    
+                    </div>
+    
+    
+                    <p class="text-(--neutral-500) font-medium">QUANTITY</p>
+                    <div class="flex items-center border border-(--neutral-200) w-32 px-20 rounded-[5px] justify-center">
+                        <button [disabled]="quantity() === min()" (click)="decrease()"
+                            class="px-3 disabled:cursor-not-allowed py-1 text-(--neutral-600) cursor-pointer font-semibold text-3xl">-</button>
+                        <input type="text" [value]="quantity()" (input)="onInputChange($event)"
+                            [max]="productData().availableQuantity" min="1"
+                            class="text-center w-12 font-semibold border-none outline-none" />
+                        <button [disabled]="quantity() === max()" (click)="increase()"
+                            class="px-3 disabled:cursor-not-allowed py-1 text-(--neutral-600) cursor-pointer font-medium text-3xl">+</button>
+                    </div>
+    
+                    <app-button
+                        [disabledStatus]="!selectedColor() || !selectedSize() || !quantity() || quantity() > productData().availableQuantity"
+                        (click)="addToCart(productData()._id)" title="Add To Cart" textColorClass="text-white"
+                        buttonWidth="200px" bgColor="bg-(--neutral-900)" buttonPadding="10px 15px">
+                    </app-button>
+    
                 </div>
-
-
-                <p class="text-(--neutral-500) font-medium">QUANTITY</p>
-                <div class="flex items-center border border-(--neutral-200) w-32 px-20 rounded-[5px] justify-center">
-                    <button [disabled]="quantity() === min()" (click)="decrease()"
-                        class="px-3 disabled:cursor-not-allowed py-1 text-(--neutral-600) cursor-pointer font-semibold text-3xl">-</button>
-                    <input type="text" [value]="quantity()" (input)="onInputChange($event)"
-                        [max]="productData().availableQuantity" min="1"
-                        class="text-center w-12 font-semibold border-none outline-none" />
-                    <button [disabled]="quantity() === max()" (click)="increase()"
-                        class="px-3 disabled:cursor-not-allowed py-1 text-(--neutral-600) cursor-pointer font-medium text-3xl">+</button>
+    
+            </div>
+    
+            <div class="flex flex-col lg:flex-row gap-y-6 lg:gap-y-0 py-44 gap-x-8">
+    
+                <div class="lg:w-[30%] w-full lg:h-80 flex flex-col justify-center gap-y-6">
+    
+                    <button routerLink="description" 
+                            routerLinkActive="bg-(--neutral-100)"
+                        class="text-(--neutral-600) flex items-center gap-x-3 transition-all self-start cursor-pointer lg:w-[65%] w-full py-1.5 pl-3 rounded-[6px]">
+                        <img src="assets/icons/More.svg" alt="More Icon">Description
+                    </button>
+    
+                    <button routerLink="reviews" 
+                            routerLinkActive="bg-(--neutral-100)"
+                        class="text-(--neutral-600) flex items-center gap-x-3 transition-all self-start cursor-pointer lg:w-[65%]  w-full py-1.5 pl-3 rounded-[6px]">
+                        <img src="assets/icons/empty-star.svg" alt="Empty-star Icon">Reviews
+                    </button>
+    
                 </div>
-
-                <app-button
-                    [disabledStatus]="!selectedColor() || !selectedSize() || !quantity() || quantity() > productData().availableQuantity"
-                    (click)="addToCart(productData()._id)" title="Add To Cart" textColorClass="text-white"
-                    buttonWidth="200px" bgColor="bg-(--neutral-900)" buttonPadding="10px 15px">
-                </app-button>
-
+    
+                <div class="w-full">
+                    <router-outlet></router-outlet>
+                </div>
+    
             </div>
-
+    
         </div>
-
-        <div class="flex flex-col lg:flex-row gap-y-6 lg:gap-y-0 py-44 gap-x-8">
-
-            <div class="lg:w-[30%] w-full lg:h-80 flex flex-col justify-center gap-y-6">
-
-                <button routerLink="description" 
-                        routerLinkActive="bg-(--neutral-100)"
-                    class="text-(--neutral-600) flex items-center gap-x-3 transition-all self-start cursor-pointer lg:w-[65%] w-full py-1.5 pl-3 rounded-[6px]">
-                    <img src="assets/icons/More.svg" alt="More Icon">Description
-                </button>
-
-                <button routerLink="reviews" 
-                        routerLinkActive="bg-(--neutral-100)"
-                    class="text-(--neutral-600) flex items-center gap-x-3 transition-all self-start cursor-pointer lg:w-[65%]  w-full py-1.5 pl-3 rounded-[6px]">
-                    <img src="assets/icons/empty-star.svg" alt="Empty-star Icon">Reviews
-                </button>
-
-            </div>
-
-            <div class="w-full">
-                <router-outlet></router-outlet>
-            </div>
-
-        </div>
-
-    </div>
-
-    <app-newsletter></app-newsletter>
-    <p-toast />
-</section>
+    
+        <app-newsletter></app-newsletter>
+        <p-toast />
+    </section>
+}

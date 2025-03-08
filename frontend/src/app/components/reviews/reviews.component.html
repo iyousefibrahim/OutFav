@@ -1,37 +1,39 @@
 <section class="flex flex-col gap-y-4">
     <h2 class="font-semibold">Reviews</h2>
-    @if(productReview().length === 0){
-    <div class="bg-(--neutral-100) my-3 rounded-[10px] py-5 px-5 flex flex-col gap-y-3">
-        <p class="font-semibold">There's No Reviews for this product yet!</p>
-    </div>
+    @if (productReview()) {
+        @if(productReview().length === 0){
+            <div class="bg-(--neutral-100) my-3 rounded-[10px] py-5 px-5 flex flex-col gap-y-3">
+                <p class="font-semibold">There's No Reviews for this product yet!</p>
+            </div>
+            }
+            <div class="max-h-64 overflow-y-scroll">
+        
+                @for (review of productReview(); track review.reviewId) {
+                <div class="bg-(--neutral-100) my-3 rounded-[10px] py-5 px-5 flex flex-col gap-y-3">
+        
+                    <div class="flex justify-between">
+                        <div class="flex items-center gap-x-3">
+                            <img class="bg-(--neutral-300) p-1 rounded-full" src="assets/icons/User.svg" alt="User Icon">
+                            <h3 class="font-medium">{{review.title}}</h3>
+                        </div>
+                        <p class="font-medium">{{review.createdAt | date }}</p>
+                    </div>
+        
+                    <div class="flex items-center gap-x-2">
+                        <p>{{review.rating}}</p>
+                        <div class="flex">
+                            @for (num of ['1','2','3','4','5'].slice(0,review.rating); track $index) {
+                            <img src="assets/icons/Star.svg" alt="Star.svg">
+                            }
+                        </div>
+                    </div>
+        
+                    <p>{{review.review}}</p>
+        
+                </div>
+                }
+            </div>
     }
-    <div class="max-h-64 overflow-y-scroll">
-
-        @for (review of productReview(); track review.reviewId) {
-        <div class="bg-(--neutral-100) my-3 rounded-[10px] py-5 px-5 flex flex-col gap-y-3">
-
-            <div class="flex justify-between">
-                <div class="flex items-center gap-x-3">
-                    <img class="bg-(--neutral-300) p-1 rounded-full" src="assets/icons/User.svg" alt="User Icon">
-                    <h3 class="font-medium">{{review.title}}</h3>
-                </div>
-                <p class="font-medium">{{review.createdAt | date }}</p>
-            </div>
-
-            <div class="flex items-center gap-x-2">
-                <p>{{review.rating}}</p>
-                <div class="flex">
-                    @for (num of ['1','2','3','4','5'].slice(0,review.rating); track $index) {
-                    <img src="assets/icons/Star.svg" alt="Star.svg">
-                    }
-                </div>
-            </div>
-
-            <p>{{review.review}}</p>
-
-        </div>
-        }
-    </div>
 
     <div class="card flex justify-end">
         <p-button (click)="showDialog()" styleClass="!bg-(--neutral-900) !border-none" label="Create Review" />
