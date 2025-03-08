@@ -1,6 +1,12 @@
 <section class="flex flex-col gap-y-4">
     <h2 class="font-semibold">Reviews</h2>
+    @if(productReview().length === 0){
+    <div class="bg-(--neutral-100) my-3 rounded-[10px] py-5 px-5 flex flex-col gap-y-3">
+        <p class="font-semibold">There's No Reviews for this product yet!</p>
+    </div>
+    }
     <div class="max-h-64 overflow-y-scroll">
+
         @for (review of productReview(); track review.reviewId) {
         <div class="bg-(--neutral-100) my-3 rounded-[10px] py-5 px-5 flex flex-col gap-y-3">
 
@@ -29,59 +35,51 @@
 
     <div class="card flex justify-end">
         <p-button (click)="showDialog()" styleClass="!bg-(--neutral-900) !border-none" label="Create Review" />
-    
+
         <p-dialog maskStyleClass="backdrop-blur-sm" [(visible)]="visible" styleClass="!border-0 !bg-transparent">
             <ng-template #headless>
                 <form [formGroup]="reviewForm" (ngSubmit)="submitReview()">
-                    <div class="flex flex-col px-8 py-8 gap-6 rounded-2xl bg-(--neutral-300)" style="border-radius: 12px;">
+                    <div class="flex flex-col px-8 py-8 gap-6 rounded-2xl bg-(--neutral-300)"
+                        style="border-radius: 12px;">
                         <h2 class="text-primary-50 font-semibold text-xl text-center">Create Review</h2>
-    
+
                         <!-- Review Title -->
                         <div class="inline-flex flex-col gap-2">
                             <label for="reviewTitle" class="text-primary-50 font-semibold">Review Title</label>
-                            <input
-                                pInputText
-                                id="reviewTitle"
-                                formControlName="title"
+                            <input pInputText id="reviewTitle" formControlName="title"
                                 class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80"
-                                placeholder="Enter review title"
-                            />
+                                placeholder="Enter review title" />
                             @if (reviewForm.get('title')?.invalid && reviewForm.get('title')?.touched) {
-                                <small class="text-red-500">
-                                    Title is required (min 5 characters)
-                                </small>
+                            <small class="text-red-500">
+                                Title is required (min 5 characters)
+                            </small>
                             }
                         </div>
-    
+
                         <!-- Review Description -->
                         <div class="inline-flex flex-col gap-2">
                             <label for="reviewDesc" class="text-primary-50 font-semibold">Review Description</label>
-                            <textarea
-                                pInputTextarea
-                                id="reviewDesc"
-                                formControlName="review"
-                                rows="3"
+                            <textarea pInputTextarea id="reviewDesc" formControlName="review" rows="3"
                                 class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80"
-                                placeholder="Write your review"
-                            ></textarea>
+                                placeholder="Write your review"></textarea>
                             @if (reviewForm.get('review')?.invalid && reviewForm.get('review')?.touched) {
-                                <small class="text-red-500">
-                                    Review must be at least 10 characters long
-                                </small>
+                            <small class="text-red-500">
+                                Review must be at least 10 characters long
+                            </small>
                             }
                         </div>
-    
+
                         <!-- Rating (Stars) -->
                         <div class="inline-flex flex-col gap-2">
                             <label class="text-primary-50 font-semibold">Rating</label>
                             <p-rating formControlName="rating"></p-rating>
                             @if (reviewForm.get('rating')?.invalid && reviewForm.get('rating')?.touched) {
-                                <small class="text-red-500">
-                                    Rating must be between 1 and 5
-                                </small>
+                            <small class="text-red-500">
+                                Rating must be between 1 and 5
+                            </small>
                             }
                         </div>
-    
+
                         <!-- Buttons -->
                         <div class="flex items-center gap-4">
                             <p-button label="Cancel" (click)="closeDialog()" [text]="true"
