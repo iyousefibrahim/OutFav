@@ -26,6 +26,73 @@
         </div>
         }
     </div>
-    <input placeholder="Enter your review" class="focus:outline-none w-full p-2 rounded-[5px] border border-gray-300" id="text" type="text"/>
 
+    <div class="card flex justify-end">
+        <p-button (click)="showDialog()" styleClass="!bg-(--neutral-900) !border-none" label="Create Review" />
+    
+        <p-dialog maskStyleClass="backdrop-blur-sm" [(visible)]="visible" styleClass="!border-0 !bg-transparent">
+            <ng-template #headless>
+                <form [formGroup]="reviewForm" (ngSubmit)="submitReview()">
+                    <div class="flex flex-col px-8 py-8 gap-6 rounded-2xl bg-(--neutral-300)" style="border-radius: 12px;">
+                        <h2 class="text-primary-50 font-semibold text-xl text-center">Create Review</h2>
+    
+                        <!-- Review Title -->
+                        <div class="inline-flex flex-col gap-2">
+                            <label for="reviewTitle" class="text-primary-50 font-semibold">Review Title</label>
+                            <input
+                                pInputText
+                                id="reviewTitle"
+                                formControlName="title"
+                                class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80"
+                                placeholder="Enter review title"
+                            />
+                            @if (reviewForm.get('title')?.invalid && reviewForm.get('title')?.touched) {
+                                <small class="text-red-500">
+                                    Title is required (min 5 characters)
+                                </small>
+                            }
+                        </div>
+    
+                        <!-- Review Description -->
+                        <div class="inline-flex flex-col gap-2">
+                            <label for="reviewDesc" class="text-primary-50 font-semibold">Review Description</label>
+                            <textarea
+                                pInputTextarea
+                                id="reviewDesc"
+                                formControlName="review"
+                                rows="3"
+                                class="!bg-white/20 !border-0 !p-4 !text-primary-50 w-80"
+                                placeholder="Write your review"
+                            ></textarea>
+                            @if (reviewForm.get('review')?.invalid && reviewForm.get('review')?.touched) {
+                                <small class="text-red-500">
+                                    Review must be at least 10 characters long
+                                </small>
+                            }
+                        </div>
+    
+                        <!-- Rating (Stars) -->
+                        <div class="inline-flex flex-col gap-2">
+                            <label class="text-primary-50 font-semibold">Rating</label>
+                            <p-rating formControlName="rating"></p-rating>
+                            @if (reviewForm.get('rating')?.invalid && reviewForm.get('rating')?.touched) {
+                                <small class="text-red-500">
+                                    Rating must be between 1 and 5
+                                </small>
+                            }
+                        </div>
+    
+                        <!-- Buttons -->
+                        <div class="flex items-center gap-4">
+                            <p-button label="Cancel" (click)="closeDialog()" [text]="true"
+                                styleClass="!p-4 w-full !text-black !border !border-white/30 hover:!bg-white/10" />
+                            <p-button label="Submit Review" type="submit" [disabled]="reviewForm.invalid"
+                                styleClass="!p-4 w-full !bg-(--neutral-500) !border-none hover:!bg-(--neutral-600) !text-white" />
+                        </div>
+                    </div>
+                </form>
+            </ng-template>
+        </p-dialog>
+    </div>
+    <p-toast />
 </section>

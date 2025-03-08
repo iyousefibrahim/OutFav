@@ -74,7 +74,7 @@
                 </div>
 
                 <app-button
-                    [disabledStatus]="!selectedColor || !selectedSize || !quantity || quantity() > productData().availableQuantity"
+                    [disabledStatus]="!selectedColor() || !selectedSize() || !quantity() || quantity() > productData().availableQuantity"
                     (click)="addToCart(productData()._id)" title="Add To Cart" textColorClass="text-white"
                     buttonWidth="200px" bgColor="bg-(--neutral-900)" buttonPadding="10px 15px">
                 </app-button>
@@ -101,7 +101,7 @@
 
             </div>
 
-            <div class="w-[60%]">
+            <div class="lg:w-[60%] w-full">
                 <router-outlet></router-outlet>
             </div>
 

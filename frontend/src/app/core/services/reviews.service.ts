@@ -27,8 +27,8 @@ export class ReviewsService {
     });
   }
 
-  createProductReview(productReview: object): Observable<any> {
-    return this._HttpClient.post(baseUrl + '/reviews', productReview, {
+  createProductReview(productId: string, productReview: object): Observable<any> {
+    return this._HttpClient.post(baseUrl + '/reviews', { ...productReview, productId }, {
       headers: {
         'Authorization': 'Bearer ' + this.token
       }

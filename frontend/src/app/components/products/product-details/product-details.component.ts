@@ -14,6 +14,7 @@ import { Toast } from 'primeng/toast';
 import { ButtonComponent } from "../../button/button.component";
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../../core/services/cart.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-details',
@@ -33,6 +34,7 @@ export class ProductDetailsComponent implements OnInit {
   private readonly _ActivatedRoute = inject(ActivatedRoute);
   private readonly _MessageService = inject(MessageService);
   private readonly _CartService = inject(CartService);
+  private readonly _TitleService = inject(Title);
 
   productData = signal<IProduct>(null as unknown as IProduct);
   reviewData = signal<IReview>(null as unknown as IReview);
@@ -52,6 +54,7 @@ export class ProductDetailsComponent implements OnInit {
         this.productData.set(res.data);
         this.max.set(res.data.availableQuantity);
         this._ProductsService.setProductDescription(this.productData().description);
+        this._TitleService.setTitle(`${this.productData().title}`);
       },
       error: (err) => {
         console.log(err);
