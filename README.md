@@ -1,6 +1,6 @@
 # OutFav E-Commerce
 
-OutFav E-Commerce is a comprehensive e-commerce application built with a Node.js, Express, MongoDB, and Mongoose backend. The frontend is still in development. This project is designed to provide a fully functional online store with a secure and efficient server-side infrastructure.
+OutFav E-Commerce is a comprehensive e-commerce application built with a Node.js, Express, MongoDB, and Mongoose backend. The frontend is developed using Angular v19 with a focus on reusable components, state management using signals, and an optimized UI/UX powered by PrimeNG and Tailwind CSS.
 
 ## Features Implemented
 
@@ -52,6 +52,17 @@ OutFav E-Commerce is a comprehensive e-commerce application built with a Node.js
 - Stripe integration for checkout sessions.
 - Create and manage payment intents.
 
+### Frontend
+
+- **Angular v19** for building a dynamic and scalable UI.
+- **State Management using Signals** for efficient reactivity.
+- **Reusable Components** to ensure modularity and maintainability.
+- **PrimeNG & Tailwind CSS** for an elegant and responsive design.
+- **ngx-spinner** for improved user experience during data fetching.
+- **Routing & Lazy Loading** for performance optimization.
+- **Authentication & Authorization** using JWT tokens.
+- **Figma Design by Ali Norouzi** for a structured and modern UI.
+
 ### Security & Performance Enhancements
 
 - **CORS:**
@@ -84,9 +95,12 @@ OutFav E-Commerce
 ├── Reviews
 ├── Address
 ├── Order
+├── Frontend (Angular 19)
 ```
 
-## Backend Technologies Used
+## Technologies Used
+
+### Backend
 - Node.js
 - Express.js
 - MongoDB & Mongoose
@@ -99,12 +113,16 @@ OutFav E-Commerce
 - compression
 - xss-clean
 
-
-## Future Improvements
-- Complete frontend development with Angular.
-- Implement order management system.
-- Add admin dashboard.
+### Frontend
+- Angular v19
+- Signals for state management
+- PrimeNG & Tailwind CSS
+- ngx-spinner
+- Angular Router & Lazy Loading
 
 ---
 
 ✨ This is a work in progress! Stay tuned for updates and improvements.
+
+🔗 **Backend API:** [OutFav API](https://outfav-production.up.railway.app/)
+🔗 **Figma Design:** [Ali Norouzi's Figma](https://www.figma.com/community/file/1357820302669976191)
