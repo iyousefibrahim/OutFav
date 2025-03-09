@@ -10,13 +10,14 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RatingModule } from 'primeng/rating';
 import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-reviews',
   imports: [
     DatePipe, Dialog, ButtonModule,
     InputTextModule, RatingModule, ReactiveFormsModule,
-    Toast
+    Toast,ButtonComponent
   ],
   templateUrl: './reviews.component.html',
   styleUrl: './reviews.component.css',
@@ -30,8 +31,8 @@ export class ReviewsComponent implements OnInit {
   productId: WritableSignal<string> = signal('');
   productReview: WritableSignal<IReviewData[]> = signal(null as unknown as IReviewData[]);
   visible: boolean = false;
-
-  getProductReviewById() {
+  displayedReviews = signal(5);
+    getProductReviewById() {
     this._ReviewsService.getProductsReviewById(this.productId()).subscribe({
       next: (res) => {
         this.productReview.set(res.data);
