@@ -21,7 +21,8 @@ export const routes: Routes = [
                     { path: 'reviews', loadComponent: () => import('./components/reviews/reviews.component').then(r => r.ReviewsComponent) }
                 ]
             },
-            { path: 'cart', loadComponent: () => import('./components/cart/cart.component').then(c => c.CartComponent) }
+            { path: 'cart', loadComponent: () => import('./components/cart/cart.component').then(c => c.CartComponent) },
+            { path: 'about', loadComponent: () => import('./components/about/about.component').then(a => a.AboutComponent) }
         ]
     },
 
