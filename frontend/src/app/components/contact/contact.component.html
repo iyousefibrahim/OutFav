@@ -1,0 +1,55 @@
+<app-breadcrumbs title="Contact" [url]="'Contact'" padding="20"></app-breadcrumbs>
+
+<section class="my-container bg-white shadow-lg rounded-2xl border border-gray-200 my-14 p-6">
+    <h2 class="text-2xl font-bold text-(--neutral-900) mb-4">Contact Us</h2>
+    <p class="text-lg text-(--neutral-700) leading-relaxed">
+        Have any questions, suggestions, or need support? Feel free to reach out to us!  
+        We're here to help and ensure you have the best shopping experience.
+    </p>
+
+    <div class="mt-6 space-y-4">
+        <div class="flex items-center gap-4">
+            <span class="text-(--neutral-900) font-semibold">Email:</span>
+            <a href="mailto:support@outfav.com" class="text-(--neutral-500) hover:underline">
+                support&#64;outfav.com
+            </a>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <span class="text-(--neutral-900) font-semibold">Address:</span>
+            <p class="text-(--neutral-700)">Cairo, Egypt</p>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <span class="text-(--neutral-900) font-semibold">Phone:</span>
+            <a href="tel:+201234567890" class="text-(--neutral-500) hover:underline">
+                +20 123 456 7890
+            </a>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <span class="text-(--neutral-900) font-semibold">Socials:</span>
+            <a href="https://twitter.com/outfav" class="text-(--neutral-500) hover:underline" target="_blank">
+                Twitter
+            </a> |
+            <a href="https://www.linkedin.com/in/youssef" class="text-(--neutral-500) hover:underline" target="_blank">
+                LinkedIn
+            </a>
+        </div>
+    </div>
+
+    <h3 class="text-xl font-bold text-(--neutral-900) mt-6">Send Us a Message</h3>
+    <form (submit)="submit($event)" class="mt-4 space-y-4">
+        <input type="text" placeholder="Your Name" class="w-full p-3 border border-gray-300 rounded-lg text-(--neutral-900)" required>
+        <input type="email" placeholder="Your Email" class="w-full p-3 border border-gray-300 rounded-lg text-(--neutral-900)" required>
+        <textarea placeholder="Your Message" class="w-full p-3 border border-gray-300 rounded-lg text-(--neutral-900)" rows="4" required></textarea>
+        <app-button 
+            class="w-full"
+            [title]="'Send Message'"
+            [textColorClass]="'text-white'"
+            [bgColor]="'bg-(--neutral-900)'"
+            [buttonPadding]="'12px 24px'">
+        </app-button>
+    </form>
+    <p-toast />
+</section>

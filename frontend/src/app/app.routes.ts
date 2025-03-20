@@ -22,7 +22,8 @@ export const routes: Routes = [
                 ]
             },
             { path: 'cart', loadComponent: () => import('./components/cart/cart.component').then(c => c.CartComponent) },
-            { path: 'about', loadComponent: () => import('./components/about/about.component').then(a => a.AboutComponent) }
+            { path: 'about', loadComponent: () => import('./components/about/about.component').then(a => a.AboutComponent) },
+            { path: 'contact', loadComponent: () => import('./components/contact/contact.component').then(c => c.ContactComponent) }
         ]
     },
 
