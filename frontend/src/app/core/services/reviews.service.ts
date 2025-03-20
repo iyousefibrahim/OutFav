@@ -8,8 +8,18 @@ import { baseUrl } from '../../environment/baseUrl';
 })
 export class ReviewsService {
 
-  constructor(private _HttpClient: HttpClient) { }
-  token = JSON.parse(localStorage.getItem('token') ?? '');
+  token: string | null = null;
+
+  constructor(private _HttpClient: HttpClient) {
+    const storedToken = localStorage.getItem('token');
+    try {
+      this.token = storedToken ? JSON.parse(storedToken) : null;
+    } catch (error) {
+      console.error("Invalid JSON in localStorage token:", error);
+      this.token = null;
+    }
+  }
+
 
   getAllProductsReviews(): Observable<any> {
     return this._HttpClient.get(baseUrl + '/reviews', {
@@ -36,12 +46,13 @@ export class ReviewsService {
   }
 
   updateProductReview(reviewId: string, productReview: object): Observable<any> {
-    return this._HttpClient.put(baseUrl + '/reviews', reviewId, {
+    return this._HttpClient.put(baseUrl + `/reviews/${reviewId}`, productReview, {
       headers: {
         'Authorization': 'Bearer ' + this.token
       }
-    })
+    });
   }
+
 
   deleteProductReview(reviewId: string): Observable<any> {
     return this._HttpClient.delete(baseUrl + `/reviews/${reviewId}`, {

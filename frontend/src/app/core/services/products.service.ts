@@ -7,10 +7,18 @@ import { baseUrl } from '../../environment/baseUrl';
   providedIn: 'root'
 })
 export class ProductsService {
+  
+  token: string | null = null;
 
-  constructor(private _HttpClient: HttpClient) { }
-
-  token = JSON.parse(localStorage.getItem('token') ?? '');
+  constructor(private _HttpClient: HttpClient) {
+    const storedToken = localStorage.getItem('token');
+    try {
+      this.token = storedToken ? JSON.parse(storedToken) : null;
+    } catch (error) {
+      console.error("Invalid JSON in localStorage token:", error);
+      this.token = null;
+    }
+  }
   productDescription: WritableSignal<string> = signal('');
 
   getAllProducts(): Observable<any> {
