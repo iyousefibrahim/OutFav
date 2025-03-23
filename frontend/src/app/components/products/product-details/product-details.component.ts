@@ -123,12 +123,13 @@ export class ProductDetailsComponent implements OnInit {
       next: (res) => {
         const id = res.get('id') ?? '';
         this.productId.set(id);
+  
+        this.getProductById();
+        this.getProductReviewById();
       },
       error: (err) => {
         console.log(err);
       }
     });
-    this.getProductById();
-    this.getProductReviewById();
   }
 }

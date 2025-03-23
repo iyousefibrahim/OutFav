@@ -1,10 +1,11 @@
 import { AfterViewInit, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LogoComponent } from "../logo/logo.component";
+import { SearchBarComponent } from "../search-bar/search-bar.component";
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, LogoComponent],
+  imports: [RouterLink, LogoComponent, SearchBarComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })

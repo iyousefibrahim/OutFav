@@ -1,0 +1,30 @@
+<div class="relative w-full">
+    <!-- Search Input with Icon -->
+    <div class="relative">
+        <img class="absolute cursor-pointer top-4 left-4 w-5 h-5" src="assets/icons/Search.png" alt="Search Icon">
+        <input [(ngModel)]="searchValue" 
+               type="search" 
+               name="search" 
+               id="search" 
+               class="focus:outline-none border border-gray-300 rounded-lg pl-12 pr-4 py-3 w-full" 
+               placeholder="Search products">
+    </div>
+
+    <!-- Product List -->
+    @if (searchValue) {
+        <div class="absolute z-30 flex flex-col gap-y-2 bg-white border border-gray-200 shadow-md rounded-lg mt-2 w-full max-h-64 overflow-y-scroll">
+            @for (product of productList() | search: searchValue; track product._id) {
+                <div class="flex items-center p-4 border-b last:border-none hover:bg-gray-100 cursor-pointer"
+                     (click)="navigateToProduct(product._id)">
+                    
+                    <img [src]="product.productImage" alt="Product Image" class="w-16 h-16 object-cover rounded-md mr-4">
+                    
+                    <div class="flex-1">
+                        <p class="text-gray-800 font-semibold">{{ product.title }}</p>
+                        <p class="text-gray-500 font-medium">${{ product.price }}</p>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
