@@ -22,7 +22,7 @@
 
                 <div class="hidden w-auto lg:flex justify-center items-center space-x-7">
                     <a routerLink="/home" class="font-medium hover:text-(--neutral-800) transition-colors" >Home</a>
-                    <a routerLink="/categories" class="font-medium hover:text-(--neutral-800) transition-colors" >Categories</a>
+                    <a routerLink="/products" class="font-medium hover:text-(--neutral-800) transition-colors" >products</a>
                     <a routerLink="/about" class="font-medium hover:text-(--neutral-800) transition-colors">About</a>
                     <a routerLink="/contact" class="font-medium hover:text-(--neutral-800) transition-colors" >Contact</a>
                 </div>
@@ -74,7 +74,7 @@
             <app-search-bar></app-search-bar>
             <div class="w-25 flex flex-col">
                 <a routerLink="/home" (click)="toggleMenu()" class="font-medium cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors">Home</a>
-                <a routerLink="/categories" (click)="toggleMenu()" class="font-medium cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors">Categories</a>
+                <a routerLink="/products" (click)="toggleMenu()" class="font-medium cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors">products</a>
                 <a routerLink="/about" (click)="toggleMenu()" class="font-medium cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors">About</a>
                 <a routerLink="/contact" (click)="toggleMenu()" class="font-medium cursor-pointer p-2 rounded-[10px] hover:bg-(--neutral-900) hover:text-white transition-colors">Contact</a>                
             @if (isLoggedIn) {
