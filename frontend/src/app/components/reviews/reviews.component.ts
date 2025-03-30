@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, inject, Input, OnInit, OnDestroy, signal, WritableSignal } from '@angular/core';
 import { ReviewsService } from '../../core/services/reviews.service';
 import { ActivatedRoute } from '@angular/router';
 import { IReviewData } from '../../core/interfaces/ireview';
@@ -11,29 +11,34 @@ import { RatingModule } from 'primeng/rating';
 import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
 import { ButtonComponent } from '../button/button.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-reviews',
   imports: [
     DatePipe, Dialog, ButtonModule,
     InputTextModule, RatingModule, ReactiveFormsModule,
-    Toast,ButtonComponent
+    Toast, ButtonComponent
   ],
   templateUrl: './reviews.component.html',
   styleUrl: './reviews.component.css',
   providers: [MessageService]
 })
-export class ReviewsComponent implements OnInit {
+export class ReviewsComponent implements OnInit, OnDestroy {
   private readonly _ReviewsService = inject(ReviewsService);
   private readonly _ActivatedRoute = inject(ActivatedRoute);
   private readonly _FormBuilder = inject(FormBuilder);
   private readonly _MessageService = inject(MessageService);
+
+  private subscriptions: Subscription = new Subscription();
+
   productId: WritableSignal<string> = signal('');
   productReview: WritableSignal<IReviewData[]> = signal(null as unknown as IReviewData[]);
   visible: boolean = false;
   displayedReviews = signal(5);
-    getProductReviewById() {
-    this._ReviewsService.getProductsReviewById(this.productId()).subscribe({
+
+  getProductReviewById() {
+    const sub = this._ReviewsService.getProductsReviewById(this.productId()).subscribe({
       next: (res) => {
         this.productReview.set(res.data);
       },
@@ -41,6 +46,7 @@ export class ReviewsComponent implements OnInit {
         console.log(err);
       }
     });
+    this.subscriptions.add(sub);
   }
 
   reviewForm = this._FormBuilder.group({
@@ -60,7 +66,7 @@ export class ReviewsComponent implements OnInit {
 
   submitReview() {
     if (this.reviewForm.valid) {
-      this._ReviewsService.createProductReview(this.productId(), this.reviewForm.value).subscribe({
+      const sub = this._ReviewsService.createProductReview(this.productId(), this.reviewForm.value).subscribe({
         next: (res) => {
           this._MessageService.add({ severity: 'success', summary: 'Success', detail: "Review Created Successfully!" });
           this.getProductReviewById();
@@ -69,12 +75,13 @@ export class ReviewsComponent implements OnInit {
           this._MessageService.add({ severity: 'error', summary: 'Error', detail: "Something went wrong!", life: 5000 });
         }
       });
+      this.subscriptions.add(sub);
       this.closeDialog();
     }
   }
 
   ngOnInit(): void {
-    this._ActivatedRoute.parent?.paramMap.subscribe({
+    const sub = this._ActivatedRoute.parent?.paramMap.subscribe({
       next: (params) => {
         const id = params.get('id');
         if (id) {
@@ -82,7 +89,13 @@ export class ReviewsComponent implements OnInit {
           this.getProductReviewById();
         }
       }
-    })
+    });
+    if (sub) {
+      this.subscriptions.add(sub);
+    }
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
 }

@@ -15,6 +15,7 @@ import { ButtonComponent } from "../../button/button.component";
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../../core/services/cart.service';
 import { Title } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-details',
@@ -36,6 +37,8 @@ export class ProductDetailsComponent implements OnInit {
   private readonly _CartService = inject(CartService);
   private readonly _TitleService = inject(Title);
 
+  private subscriptions: Subscription = new Subscription();
+
   productData = signal<IProduct>(null as unknown as IProduct);
   reviewData = signal<IReview>(null as unknown as IReview);
 
@@ -47,28 +50,27 @@ export class ProductDetailsComponent implements OnInit {
   min: WritableSignal<number> = signal(1);
   max: WritableSignal<number> = signal(99);
   quantityChange: WritableSignal<number> = signal(0);
+  isLoggedIn: boolean = localStorage.getItem('token') ? true : false;
 
   getProductById() {
-    this._ProductsService.getProductById(this.productId()).subscribe({
+    const sub = this._ProductsService.getProductById(this.productId()).subscribe({
       next: (res) => {
         this.productData.set(res.data);
         this.max.set(res.data.availableQuantity);
         this._ProductsService.setProductDescription(this.productData().description);
         this._TitleService.setTitle(`${this.productData().title}`);
       },
-      error: (err) => {
-        console.log(err);
-      }
+      error: (err) => console.log(err)
     });
+    this.subscriptions.add(sub);
   }
 
   getProductReviewById() {
-    this._ReviewsService.getProductsReviewById(this.productId()).subscribe({
-      next:(res)=>{
-        console.log(res,"details");
-        this.reviewData.set(res);
-      }
-    })
+    const sub = this._ReviewsService.getProductsReviewById(this.productId()).subscribe({
+      next: (res) => this.reviewData.set(res),
+      error: (err) => console.log(err)
+    });
+    this.subscriptions.add(sub);
   }
 
   copyProductLink() {
@@ -83,16 +85,12 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addToCart(productId: string) {
-    if (this.selectedColor && this.selectedSize) {
-      this._CartService.addToCart(productId, this.quantity(), this.selectedColor(), this.selectedSize()).subscribe({
-        next: (res) => {
-          console.log("added to cart", res);
-        },
-        error: (err) => {
-          console.log(err);
-
-        }
+    if (this.selectedColor() && this.selectedSize()) {
+      const sub = this._CartService.addToCart(productId, this.quantity(), this.selectedColor(), this.selectedSize()).subscribe({
+        next: (res) => console.log("added to cart", res),
+        error: (err) => console.log(err)
       });
+      this.subscriptions.add(sub);
     }
   }
 
@@ -114,22 +112,24 @@ export class ProductDetailsComponent implements OnInit {
     let value = event.target.value;
     if (value < this.min()) value = this.min();
     if (value > this.max()) value = this.max();
-    this.quantity = value;
+    this.quantity.set(value);
     this.quantityChange.set(this.quantity());
   }
 
   ngOnInit(): void {
-    this._ActivatedRoute.paramMap.subscribe({
+    const routeSub = this._ActivatedRoute.paramMap.subscribe({
       next: (res) => {
         const id = res.get('id') ?? '';
         this.productId.set(id);
-  
         this.getProductById();
         this.getProductReviewById();
       },
-      error: (err) => {
-        console.log(err);
-      }
+      error: (err) => console.log(err)
     });
+    this.subscriptions.add(routeSub);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

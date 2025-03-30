@@ -24,7 +24,7 @@
                     </div>
     
                     <p class="font-semibold text-[20px]">{{productData().price | currency}}</p>
-    
+                    
                     <div>
                         <p class="text-(--neutral-500) font-medium">AVAILABLE COLORS</p>
                         <div class="flex gap-x-3 pt-5">
@@ -75,7 +75,7 @@
                     </div>
     
                     <app-button
-                        [disabledStatus]="!selectedColor() || !selectedSize() || !quantity() || quantity() > productData().availableQuantity"
+                        [disabledStatus]="!selectedColor() || !selectedSize() || !quantity() || quantity() > productData().availableQuantity || !isLoggedIn"
                         (click)="addToCart(productData()._id)" title="Add To Cart" textColorClass="text-white"
                         buttonWidth="200px" bgColor="bg-(--neutral-900)" buttonPadding="10px 15px">
                     </app-button>
